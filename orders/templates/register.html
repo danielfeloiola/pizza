@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}: Register {% endblock %}
+{% block body %}
+
+<style>
+
+.helptext{
+  visibility: hidden;
+  display: none;
+}
+
+</style>
+
+
+<!-- start banner Area -->
+
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
+            <div class="banner-content col-lg-8 col-md-12" style= "width: 50%; margin: 0 auto;">
+
+                <!-- FORM AREA -->
+                <div class=' mx-auto w-50 p-3'>
+                    {% if message %}
+                        <div class='text-center'>
+                            {{message}}
+                        </div>
+                    {% endif %}
+                    <form class='m-5' action="{% url 'register' %}" method="POST" >
+                        {% csrf_token %}
+                        {{ form.as_table }}
+                        <br>
+                        <button type="submit" class="genric-btn primary circle">Register</button>
+                    </form>
+                    <div class='text-center m-2'>
+                        Already have an account? <a href="{% url 'login'%}">Log in</a>!
+
+                    </div>
+                </div>
+
+                <!-- END OF LOGIN FORM -->
+
+            </div>
+        </div>
+    </div>
+<!-- End banner Area -->
+
+
+
+
+{% endblock %}
