@@ -22,5 +22,15 @@ def register(request):
     return render(request,"register.html")
 
 def menu(request):
+    from .models import Salad,DinnerPlatter,Pasta,Sub,RegularPizza,SicilianPizza
 
-    return render(request,"menu.html")
+    context = {
+        "RegularPizza": RegularPizza.objects.all(),
+        "SicilianPizza": SicilianPizza.objects.all(),
+        "salads": Salad.objects.all(),
+        "platters": DinnerPlatter.objects.all(),
+        "pastas": Pasta.objects.all(),
+        'subs': Sub.objects.all()
+    }
+
+    return render(request,"menu.html", context)

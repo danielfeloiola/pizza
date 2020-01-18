@@ -1,5 +1,5 @@
 	<!DOCTYPE html>
-	<html lang="zxx" class="no-js">
+	<html lang="en" class="no-js">
 	<head>
         {% load staticfiles %}
 		<!-- Mobile Specific Meta -->
@@ -51,6 +51,10 @@
             <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
             <!--<link rel="stylesheet" href="css/main.css">-->
 
+            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+
+
+
 		</head>
 		<body>
 
@@ -65,27 +69,38 @@
 				        <ul class="nav-menu">
 				          <li class="menu"><a href="/">Home</a></li>
                           <li class="menu"><a href="{% url 'menu' %}">Menu</a></li>
-
+                         <!--
 				          <li><a href="#dish">Dish</a></li>
 				          <li><a href="#chefs">Chefs</a></li>
 				          <li><a href="#blog">Blog</a></li>
+                        -->
+                          <li><a href="#chefs">Directions</a></li>
+                          <li><a href="#blog">Hours</a></li>
+
+
 				          <li><a href="#contact">Contact</a></li>
 
                           {% if user.is_authenticated %}
-                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                          <li class="menu-has-children"><a href="">Account</a>
+                            <ul>
+                                  <li><a href="">Change Password</a></li>
+                                  <li><a href="{% url 'logout' %}">Log Out</a></li>
+                            </ul>
+                        </li>
                           {% else %}
 
                             <li><a href="{% url 'login' %}">Log In</a><li>
                           {% endif %}
 
 
-                          <!--<li><a href="login.html">Log In</a></li>-->
+                          <!--<li><a href="login.html">Log In</a></li>
 				          <li class="menu-has-children"><a href="">Pages</a>
 				            <ul>
 				              <li><a href="generic.html">Generic</a></li>
 				              <li><a href="elements.html">Elements</a></li>
 				            </ul>
 				          </li>
+                          -->
 				        </ul>
 				      </nav><!-- #nav-menu-container -->
 			    	</div>

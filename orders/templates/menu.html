@@ -4,20 +4,178 @@
 {% block body %}
 
 
-<!-- start banner Area -->
+<section class="features-area pt-100" id="feature" style="height:2000px;">
 
     <div class="container">
-        <div class="row fullscreen d-flex align-items-center justify-content-start">
-            <div class="banner-content col-lg-8 col-md-12" style= "width: 50%; margin: 0 auto;">
 
-                
+        <div style="height: 1000px !important;" class="row fullscreen d-flex justify-content-start">
 
+            <div class="banner-content col-lg-8 col-md-12" style= "width: 50%; margin: 0 auto; margin-bottom: -980px;">
+
+                <div style="height:100%; width: 49%; margin: 0 auto;  display:block;float: left;"> <!--   overflow:auto;     padding-left: 30%; -->
+
+                    <!-- START MENU ITEMS -->
+
+                    <!-- Sicilian Pizzas -->
+                    <h3 class="mb-30">Sicilian Pizzas</h3>
+
+                    <div class="progress-table-wrap" style="overflow-x:hidden;">
+                        <div class="progress-table" style="padding-left:20px;">
+                            <div class="table-head">
+                                <div style="width: 21%;" class="visit">Pizza</div>
+                                <div class="serial">Small</div>
+                                <div class="serial">Large</div>
+                            </div>
+
+                            {% for SPizza in SicilianPizza %}
+                            <div class="table-row">
+                                <div style="width: 21%;" class="visit"> {{ SPizza.name }}</div>
+                                <div class="serial">{{ SPizza.price_small }}</div>
+                                <div class="serial">{{ SPizza.price_large }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+
+                    <!--Regular Pizzas -->
+                    <h3 class="mb-30">Regular Pizzas</h3>
+
+                    <div class="progress-table-wrap" style="overflow-x:hidden;">
+                        <div class="progress-table" style="padding-left:20px;">
+                            <div class="table-head">
+                                <div style="width: 21%;" class="visit">Pizza</div>
+                                <div class="serial">Small</div>
+                                <div class="serial">Large</div>
+                            </div>
+
+                            {% for Pizza in RegularPizza %}
+                            <div class="table-row">
+                                <div style="width: 21%;" class="visit"> {{ Pizza.name }}</div>
+                                <div class="serial">{{ Pizza.price_small }}</div>
+                                <div class="serial">{{ Pizza.price_large }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+
+                    <!--Subs-->
+                    <h3 class="mb-30">Subs</h3>
+
+                    <div class="progress-table-wrap" style="overflow-x:hidden;">
+                        <div class="progress-table" style="padding-left:20px;">
+                            <div class="table-head">
+                                <div style="width: 21%;" class="visit">Sub</div>
+                                <div class="serial">Small</div>
+                                <div class="serial">Large</div>
+                            </div>
+
+                            {% for sub in subs %}
+                            <div class="table-row">
+                                <div style="width: 21%;" class="visit"> {{ sub.name }}</div>
+
+                                <!--
+                                {% if sub.name == "Steak + Cheese" %}
+                                <td>Add options</td>
+                                {% endif%}
+                                -->
+
+                                <div class="serial">{{ sub.price_small }}</div>
+                                <div class="serial">{{ sub.price_large }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                <!-- End of the left side div -->
+                </div>
+
+                <!-- Start right Side of the page -->
+                <div style="height:100%;width: 49%; margin: 0 auto;  display:block;float: right;"> <!-- overflow:auto; -->
+
+                    <!--Pasta-->
+                    <h3 class="mb-30">Pasta</h3>
+
+                    <div class="progress-table-wrap" style="overflow-x:hidden;">
+                        <div class="progress-table" style="padding-left:20px;">
+                            <div class="table-head">
+                                <div style="width: 21%;"class="visit">Pasta</div>
+                                <div class="serial"></div>
+                                <div class="serial">Price</div>
+                            </div>
+
+                            {% for pasta in pastas %}
+                            <div class="table-row">
+                                <div style="width: 21%;" class="visit"> {{ pasta.name }}</div>
+                                <div class="serial"></div>
+                                <div class="serial">{{ pasta.price }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+
+                    <!--Salads-->
+                    <h3 class="mb-30">Salads</h3>
+
+                    <div class="progress-table-wrap" style="overflow-x:hidden;">
+                        <div class="progress-table" style="padding-left:20px;">
+                            <div class="table-head">
+                                <div class="visit">Salad</div>
+                                <div class="serial"></div>
+                                <div class="serial">Price</div>
+                            </div>
+
+                            {% for salad in salads %}
+                            <div class="table-row">
+                                <div class="visit"> {{ salad.name }}</div>
+                                <div class="serial"></div>
+                                <div class="serial">{{ salad.price }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+
+                    <!--Dinner Platters-->
+                    <h3 class="mb-30">Dinner Platters</h3>
+
+                    <div class="progress-table-wrap" style="overflow-x:hidden;">
+                        <div class="progress-table" style="padding-left:20px;">
+                            <div class="table-head">
+                                <div style="width: 21%;" class="visit">Item</div>
+                                <div class="serial">Small</div>
+                                <div class="serial">Large</div>
+                            </div>
+
+                            {% for platter in platters %}
+                            <div class="table-row">
+                                <div style="width: 21%;" class="visit"> {{ platter.name }}</div>
+                                <div class="serial">{{ platter.price_small }}</div>
+                                <div class="serial">{{ platter.price_large }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- end of menu items-->
+
+                <!-- close right div -->
+                </div>
+
+            <!-- close content div -->
             </div>
+
+        <!-- close dflex container -->
         </div>
+
+    <!-- close container -->
     </div>
-<!-- End banner Area -->
 
-
-
+<!-- Close manu section -->
+</section>
 
 {% endblock %}
