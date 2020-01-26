@@ -3,179 +3,494 @@
 {% block title %}: Menu {% endblock %}
 {% block body %}
 
-
-<section class="features-area pt-100" id="feature" style="height:2000px;">
-
-    <div class="container">
-
-        <div style="height: 1000px !important;" class="row fullscreen d-flex justify-content-start">
-
-            <div class="banner-content col-lg-8 col-md-12" style= "width: 50%; margin: 0 auto; margin-bottom: -980px;">
-
-                <div style="height:100%; width: 49%; margin: 0 auto;  display:block;float: left;"> <!--   overflow:auto;     padding-left: 30%; -->
-
-                    <!-- START MENU ITEMS -->
-
-                    <!-- Sicilian Pizzas -->
-                    <h3 class="mb-30">Sicilian Pizzas</h3>
-
-                    <div class="progress-table-wrap" style="overflow-x:hidden;">
-                        <div class="progress-table" style="padding-left:20px;">
-                            <div class="table-head">
-                                <div style="width: 21%;" class="visit">Pizza</div>
-                                <div class="serial">Small</div>
-                                <div class="serial">Large</div>
-                            </div>
-
-                            {% for SPizza in SicilianPizza %}
-                            <div class="table-row">
-                                <div style="width: 21%;" class="visit"> {{ SPizza.name }}</div>
-                                <div class="serial">{{ SPizza.price_small }}</div>
-                                <div class="serial">{{ SPizza.price_large }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <br>
-
-                    <!--Regular Pizzas -->
-                    <h3 class="mb-30">Regular Pizzas</h3>
-
-                    <div class="progress-table-wrap" style="overflow-x:hidden;">
-                        <div class="progress-table" style="padding-left:20px;">
-                            <div class="table-head">
-                                <div style="width: 21%;" class="visit">Pizza</div>
-                                <div class="serial">Small</div>
-                                <div class="serial">Large</div>
-                            </div>
-
-                            {% for Pizza in RegularPizza %}
-                            <div class="table-row">
-                                <div style="width: 21%;" class="visit"> {{ Pizza.name }}</div>
-                                <div class="serial">{{ Pizza.price_small }}</div>
-                                <div class="serial">{{ Pizza.price_large }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <br>
-
-                    <!--Subs-->
-                    <h3 class="mb-30">Subs</h3>
-
-                    <div class="progress-table-wrap" style="overflow-x:hidden;">
-                        <div class="progress-table" style="padding-left:20px;">
-                            <div class="table-head">
-                                <div style="width: 21%;" class="visit">Sub</div>
-                                <div class="serial">Small</div>
-                                <div class="serial">Large</div>
-                            </div>
-
-                            {% for sub in subs %}
-                            <div class="table-row">
-                                <div style="width: 21%;" class="visit"> {{ sub.name }}</div>
-
-                                <!--
-                                {% if sub.name == "Steak + Cheese" %}
-                                <td>Add options</td>
-                                {% endif%}
-                                -->
-
-                                <div class="serial">{{ sub.price_small }}</div>
-                                <div class="serial">{{ sub.price_large }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+{% load staticfiles %}
 
 
-                <!-- End of the left side div -->
+<section class="top-dish-area section-gap" id="dish">
+    <div class="container" style="text-align:center;">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-30 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Take a look at our menu</h1>
+                    <p>We have a wide selection of freshly made pizzas and subs</p>
                 </div>
-
-                <!-- Start right Side of the page -->
-                <div style="height:100%;width: 49%; margin: 0 auto;  display:block;float: right;"> <!-- overflow:auto; -->
-
-                    <!--Pasta-->
-                    <h3 class="mb-30">Pasta</h3>
-
-                    <div class="progress-table-wrap" style="overflow-x:hidden;">
-                        <div class="progress-table" style="padding-left:20px;">
-                            <div class="table-head">
-                                <div style="width: 21%;"class="visit">Pasta</div>
-                                <div class="serial"></div>
-                                <div class="serial">Price</div>
-                            </div>
-
-                            {% for pasta in pastas %}
-                            <div class="table-row">
-                                <div style="width: 21%;" class="visit"> {{ pasta.name }}</div>
-                                <div class="serial"></div>
-                                <div class="serial">{{ pasta.price }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <br>
-
-                    <!--Salads-->
-                    <h3 class="mb-30">Salads</h3>
-
-                    <div class="progress-table-wrap" style="overflow-x:hidden;">
-                        <div class="progress-table" style="padding-left:20px;">
-                            <div class="table-head">
-                                <div class="visit">Salad</div>
-                                <div class="serial"></div>
-                                <div class="serial">Price</div>
-                            </div>
-
-                            {% for salad in salads %}
-                            <div class="table-row">
-                                <div class="visit"> {{ salad.name }}</div>
-                                <div class="serial"></div>
-                                <div class="serial">{{ salad.price }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <br>
-
-                    <!--Dinner Platters-->
-                    <h3 class="mb-30">Dinner Platters</h3>
-
-                    <div class="progress-table-wrap" style="overflow-x:hidden;">
-                        <div class="progress-table" style="padding-left:20px;">
-                            <div class="table-head">
-                                <div style="width: 21%;" class="visit">Item</div>
-                                <div class="serial">Small</div>
-                                <div class="serial">Large</div>
-                            </div>
-
-                            {% for platter in platters %}
-                            <div class="table-row">
-                                <div style="width: 21%;" class="visit"> {{ platter.name }}</div>
-                                <div class="serial">{{ platter.price_small }}</div>
-                                <div class="serial">{{ platter.price_large }}</div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <br>
-
-                    <!-- end of menu items-->
-
-                <!-- close right div -->
-                </div>
-
-            <!-- close content div -->
             </div>
-
-        <!-- close dflex container -->
         </div>
 
-    <!-- close container -->
+        <div class="row">
+            <!-- START OF THE MENU -->
+
+            <!-- SICILIAN PIZZA -->
+            <div class="single-dish" style="width:350px;  margin: 15px auto 15px auto; display:inline-block;">
+
+                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Sicilian Pizzas</h4>
+
+                <div class="thumb">
+                    <img style="transform: none;" src="{% static 'img/d1.jpg' %}" class="img-fluid" alt=""/>
+                </div>
+
+                <!--table-->
+                <div class="progress-table-wrap" style="width: inherit; overflow-x: hidden;">
+                    <div class="progress-table" style="padding-left:20px;">
+                        <!--head-->
+                        <div class="table-head">
+                            <div style="width: 20%;text-align:left" class="visit">Pizza</div>
+                            <div style="text-align:left" class="serial">Small</div>
+                            <div style="text-align:left" class="serial">Large</div>
+                        </div>
+                        <!--body-->
+                        {% for SPizza in SicilianPizza %}
+                        <div class="table-row">
+                            <div style="width: 20%; text-align:left;" class="visit"> {{ SPizza.name }}</div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ SPizza.price_small }}" name="{{ SPizza.name }}" itemname="Sicilian Pizzas" num="{{ forloop.counter0 }}">
+                                    {{ SPizza.price_small }}
+                                </button>
+                            </div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ SPizza.price_large }}" name="{{ SPizza.name }}" itemname="Sicilian Pizzas" num="{{ forloop.counter0 }}">
+                                    {{ SPizza.price_large }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- REGULAR PIZZA  -->
+            <div class="single-dish " style="width:350px; margin: 15px auto 15px auto; display:inline-block;">
+                <!--title-->
+                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Regular Pizzas</h4>
+                <!--image-->
+                <div class="thumb">
+                    <img style="transform: none;" class="img-fluid" src="{% static 'img/d2.jpg' %}" alt=""> <!--src="img/d2.jpg"-->
+                </div>
+
+                <!--table-->
+                <div class="progress-table-wrap" style="overflow-x:hidden;">
+                    <div class="progress-table" style="padding-left:20px;">
+                        <!--head-->
+                        <div class="table-head">
+                            <div style="width: 20%;text-align:left;" class="visit">Pizza</div>
+                            <div style="text-align:left" class="serial">Small</div>
+                            <div style="text-align:left" class="serial">Large</div>
+                        </div>
+                        <!--body-->
+                        {% for Pizza in RegularPizza %}
+                        <div class="table-row">
+                            <div style="width: 20%; text-align:left" class="visit"> {{ Pizza.name }}</div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ Pizza.price_small }}" name="{{ Pizza.name }}" itemname="Regular Pizzas" num="{{ forloop.counter0 }}">
+                                    {{ Pizza.price_small }}
+                                </button>
+                            </div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ Pizza.price_large }}" name="{{ Pizza.name }}" itemname="Regular Pizzas" num="{{ forloop.counter0 }}">
+                                    {{ Pizza.price_large }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+            </div>
+
+            <!-- PASTA -->
+            <div class="single-dish" style="width:350px; margin: 15px auto 15px auto; display:inline-block;">
+                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Pasta</h4>
+
+                <div class="thumb">
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                </div>
+                <!--table-->
+                <div class="progress-table-wrap" style="overflow-x:hidden;">
+                    <div class="progress-table" style="padding-left:20px;">
+                        <!--head-->
+                        <div class="table-head">
+                            <div style="width: 20%;text-align:left;" class="visit">Pasta</div>
+                            <div style="text-align:left" class="serial"></div>
+                            <div style="text-align:left" class="serial">Price</div>
+                        </div>
+                        <!-- body -->
+                        {% for pasta in pastas %}
+                        <div class="table-row">
+                            <div style="width: 20%;text-align:left;" class="visit"> {{ pasta.name }}</div>
+
+                            <div class="serial"></div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ pasta.price }}" name="{{ pasta.name }}" itemname="Pasta">
+                                    {{ pasta.price }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- end of pasta -->
+
+            <!-- END OF ROW -->
+
+            <!-- SALADS -->
+            <div class="single-dish" style="width:350px; margin: 5px auto 5px auto; display:inline-block;">
+                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Salads</h4>
+
+                <div class="thumb">
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                </div>
+                <!--table-->
+                <div class="progress-table-wrap" style="overflow-x:hidden;">
+                    <div class="progress-table" style="padding-left:20px;">
+                        <!--head-->
+                        <div class="table-head">
+                            <div style="width: 20%;text-align:left;" class="visit">Salad</div>
+                            <div style="text-align:left" class="serial"></div>
+                            <div style="text-align:left" class="serial">Price</div>
+                        </div>
+                        <!-- body -->
+                        {% for salad in salads %}
+                        <div class="table-row">
+                            <div style="width: 20%;text-align:left;" class="visit"> {{ salad.name }}</div>
+
+                            <div class="serial"></div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ salad.price }}" name="{{ salad.name }}" itemname="Salad">
+                                    {{ salad.price }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- end of salads -->
+
+            <!-- DINNER PLATTERS -->
+            <div class="single-dish" style="width:350px; margin: 5px auto 5px auto; display:inline-block;">
+                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">dinner platters</h4>
+
+                <div class="thumb">
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                </div>
+                <!--table-->
+                <div class="progress-table-wrap" style="overflow-x:hidden;">
+                    <div class="progress-table" style="padding-left:20px;">
+                        <!--head-->
+                        <div class="table-head">
+                            <div style="width: 20%;text-align:left;" class="visit">platter</div>
+                            <div style="text-align:left" class="serial">Small</div>
+                            <div style="text-align:left" class="serial">large</div>
+                        </div>
+                        <!-- body -->
+                        {% for platter in platters %}
+                        <div class="table-row">
+                            <div style="width: 20%;text-align:left;" class="visit"> {{ platter.name }}</div>
+
+
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ platter.price_small }}" name="{{ platter.name }}" itemname="Dinner Platter">
+                                    {{ platter.price_small }}
+                                </button>
+                            </div>
+
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ platter.price_large }}" name="{{ platter.name }}" itemname="Dinner Platter">
+                                    {{ platter.price_large }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- end of Dinner -->
+
+            <!-- SUBS -->
+            <div class="single-dish" style="width:350px; margin: 5px auto 5px auto; display:inline-block;">
+                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Subs</h4>
+
+                <div class="thumb">
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                </div>
+                <!--table-->
+                <div class="progress-table-wrap" style="overflow-x:hidden;">
+                    <div class="progress-table" style="padding-left:20px;">
+                        <!--head-->
+                        <div class="table-head">
+                            <div style="text-align:left; width: 20%;" class="visit">Sub</div>
+                            <div style="text-align:left" class="serial">Small</div>
+                            <div style="text-align:left" class="serial">Large</div>
+                        </div>
+                        <!--body-->
+                        {% for sub in subs %}
+                        <div class="table-row">
+                            <div style="width: 20%; text-align:left" class="visit"> {{ sub.name }}</div>
+
+                            <!--
+                            {% if sub.name == "Steak + Cheese" %}
+                            <td>Add options</td>
+                            {% endif%}
+                            -->
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#subModal" size="{{ sub.price_small }}" name="{{ sub.name }}" itemname="Sub" >
+                                    {{ sub.price_small }}
+                                </button>
+                            </div>
+                            <div class="serial">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#subModal" size="{{ sub.price_large }}" name="{{ sub.name }}" itemname="Subs" >
+                                    {{ sub.price_large }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
     </div>
+</section>
+
+
+
+
+
+<!-- Subs Modal -->
+<div class="modal fade" id="subModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'menu' %}" method="post" id='form1'>
+              {% csrf_token %}
+                <ul class='description'>
+                </ul>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="genric-btn default circle" data-dismiss="modal">Cancel</button>
+        <button type="submit" form="form1" class="genric-btn primary circle">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'menu' %}" method="post" id='form1'>
+              {% csrf_token %}
+                <ul class='description'>
+                </ul>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="genric-btn default circle" data-dismiss="modal">Cancel</button>
+        <button type="submit" form="form1" class="genric-btn primary circle">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Pizza -->
+<div class="modal fade" id="ModalPizza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel-pizza">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'menu' %}" method="post" id='form1-pizza'>
+              {% csrf_token %}
+                <ul class='description-pizza'>
+                </ul>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="genric-btn default circle" data-dismiss="modal">Cancel</button>
+        <button type="submit" form="form1-pizza" class="genric-btn primary circle">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <!-- Close manu section -->
 </section>
+
+
+
+<script>
+
+    // When someone clicks on the price
+    document.querySelectorAll('#link').forEach(function(button) {
+        button.onclick = function() {
+
+            // Check if an item was already clicked
+            // if yes, clear the item list
+            if (item != 0) {
+                let list = document.querySelector('.description');
+                list.innerHTML = '';
+            }
+
+            // Get item price and name
+            var item = button.attributes.itemname.value;
+            var price = button.attributes.size.value;
+            var name = button.attributes.name.value;
+
+            // Make a title to the modal window
+            document.querySelector('#exampleModalLabel').innerHTML =  item;
+
+            // Make list items to add to modal
+            let li1 = document.createElement('li');
+            li1.innerHTML = item + ' (' + name + ')';
+
+            let li2 = document.createElement('li');
+            li2.innerHTML = price;
+
+            // Select the ul element
+            let list = document.querySelector('.description');
+
+            // Append and magic happens
+            list.appendChild(li1);
+            list.appendChild(li2);
+
+        };
+    });
+
+    // The same but now for pizza
+    // When someone clicks on the price
+    document.querySelectorAll('#link-pizza').forEach(function(button) {
+        button.onclick = function() {
+
+            // Check if an item was already clicked
+            // if yes, clear the item list and selectors
+            if (item != 0) {
+                let list = document.querySelector('.description-pizza');
+                list.innerHTML = '';
+
+                // look for pizza toppings selectors and remove them
+                document.querySelectorAll("#selector").forEach(selector => {
+                    selector.remove();
+                });
+            }
+
+            // Get item price and name
+            var item = button.attributes.itemname.value;
+            var price = button.attributes.size.value;
+            var name = button.attributes.name.value;
+
+            // Get the form target
+            var form = document.querySelector('#form1-pizza')
+
+            // counter for toppings
+            var loop = button.attributes.num.value;
+            var numberOfLoops = parseInt(loop)
+
+            // Make a title to the modal window
+            document.querySelector('#exampleModalLabel-pizza').innerHTML =  item;
+
+            // Make list items to add to modal
+            let listItem1 = document.createElement('li');
+            let listItem2 = document.createElement('li');
+            listItem1.innerHTML = item + ' (' + name + ')';
+            listItem2.innerHTML = price;
+
+            // Select the ul element
+            let list = document.querySelector('.description-pizza');
+
+            // Append and magic happens
+            list.appendChild(listItem1);
+            list.appendChild(listItem2);
+
+            // Add selectors depending on the amount of items
+            if(numberOfLoops == 0){
+
+            } else if(numberOfLoops == 1){
+                var htmlString = "{% for value in "x"|ljust:"1" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
+                let div = document.createElement('div');
+                div.innerHTML = htmlString;
+                form.appendChild(div)
+            } else if(numberOfLoops == 2){
+                var htmlString = "{% for value in "x"|ljust:"2" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
+                let div = document.createElement('div');
+                div.innerHTML = htmlString;
+                form.appendChild(div)
+            } else if(numberOfLoops == 3){
+                var htmlString = "{% for value in "x"|ljust:"3" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
+                let div = document.createElement('div');
+                div.innerHTML = htmlString;
+                form.appendChild(div)
+            } else if(numberOfLoops == 4){
+                var htmlString = "{% for value in "x"|ljust:"4" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
+                let div = document.createElement('div');
+                div.innerHTML = htmlString;
+                form.appendChild(div)
+            }
+        };
+    });
+
+
+    function submitform()
+    {
+      document.myform.submit();
+    }
+
+</script>
+<style>
+    #link {
+        background: none!important;
+        border: none;
+        padding: 0!important;
+    }
+    #link-pizza {
+        background: none!important;
+        border: none;
+        padding: 0!important;
+    }
+</style>
+
 
 {% endblock %}

@@ -20,7 +20,7 @@ class CustomUserChangeForm(UserChangeForm):
         help_texts = {
             'username': None,
         }
-
+'''
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     first_name = forms.CharField()
@@ -37,3 +37,4 @@ class UserRegisterForm(UserCreationForm):
             'password1': '',
             'password2': '',
         }
+'''

@@ -3,18 +3,45 @@
 {% block title %}: Log In {% endblock %}
 {% block body %}
 
+<style>
+
+    input{
+        width: -moz-available;
+
+    }
+    .m-5{
+        padding-top: 40px;
+        padding-bottom: 0px;
+    }
+    .text-center{
+        padding-bottom: 30px;"
+    }
+    .banner-content{
+        margin: auto;
+    }
+    @media only screen and (max-width: 600px) {
+      .mx-auto{
+          width: 100% !important;
+      }
+  }
+
+</style>
+
+
 <!-- start banner Area -->
 <section class="banner-area relative" id="home">
     <div class="container">
         <div class="row fullscreen d-flex align-items-center justify-content-start">
-            <div class="banner-content col-lg-8 col-md-12" style= "width: 50%; margin: 0 auto;">
+            <div class="banner-content col-lg-8 col-md-12"> <!-- style="width: 50%; margin: 0 auto;" -->
 
                 <!-- LOGIN FORM AREA -->
-                <div class=' mx-auto w-50 p-3' style="background-color: white; border-radius: 10px;">
-                    {% if message %}
-                        <div class='text-center'>
+                <div class='mx-auto w-50 p-0' style="background-color: white; border-radius: 10px;">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class='generic-blockquote'>
                             {{message}}
                         </div>
+                        {% endfor %}
                     {% endif %}
                     <form class='m-5' action="{% url 'login' %}" method="POST" >
                         {% csrf_token %}
