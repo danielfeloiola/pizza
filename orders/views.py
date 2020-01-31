@@ -64,9 +64,13 @@ def menu(request):
             sub_type = sub_form.cleaned_data['sub_type']
             sub_size = sub_form.cleaned_data['sub_size']
             sub_price = sub_form.cleaned_data['sub_price']
+            extra_cheese = sub_form.cleaned_data['extra_cheese']
+            extra_green_pepper = sub_form.cleaned_data['extra_green_pepper']
+            extra_mushroom = sub_form.cleaned_data['extra_mushroom']
+            extra_onion = sub_form.cleaned_data['extra_onion']
 
             # print for testing
-            print("sub form", sub_name, sub_type, sub_size, sub_price)
+            print("sub form", sub_name, sub_type, sub_size, sub_price, extra_cheese, extra_green_pepper, extra_mushroom,extra_onion)
 
         # make context and render template
         context = {
