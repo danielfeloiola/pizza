@@ -1,12 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-# ad topings to each model
+class Topping(models.Model):
+    name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f"{self.name}"
+
 class RegularPizza(models.Model):
     name = models.CharField(max_length=64)
     price_small = models.CharField(max_length=64)
     price_large = models.CharField(max_length=64)
+
+    toppings = models.ManyToManyField(Topping)
 
     def __str__(self):
         return f"{self.name} - {self.price_small} - {self.price_large}"
@@ -15,6 +23,8 @@ class SicilianPizza(models.Model):
     name = models.CharField(max_length=64)
     price_small = models.CharField(max_length=64)
     price_large = models.CharField(max_length=64)
+
+    toppings = models.ManyToManyField(Topping)
 
     def __str__(self):
         return f"{self.name} - {self.price_small} - {self.price_large}"
@@ -54,9 +64,3 @@ class Pasta(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.price}"
-
-class Topping(models.Model):
-    name = models.CharField(max_length=64)
-
-    def __str__(self):
-        return f"{self.name}"

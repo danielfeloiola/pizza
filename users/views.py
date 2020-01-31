@@ -2,32 +2,13 @@
 # Create your views here.
 
 # accounts/views.py
+
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from . forms import CustomUserCreationForm
 
-
 from django.shortcuts import render
-
-'''
-class SignUp(generic.CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'register.html'
-'''
-
-####################
-'''
-elif request.method == 'POST':
-
-    subject = "Welcome to Pinochio's Pizza"
-    body = "Your user account has been created and  it's ready to use!."
-    print(request)
-    email = EmailMessage('Subject', 'Body', to=['your@email.com'])
-    email.send()
-'''
-
 
 from django.contrib.messages import error
 

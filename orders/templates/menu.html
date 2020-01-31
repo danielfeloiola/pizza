@@ -6,7 +6,20 @@
 {% load staticfiles %}
 
 
+
 <section class="top-dish-area section-gap" id="dish">
+
+{% if messages %}
+    <div style="display: flex;">
+        <div style="flex-grow: 1;"></div>
+        <div class='alert'>
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ messages }}
+        </div>
+    </div>
+{% endif %}
+
+
     <div class="container" style="text-align:center;">
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-30 col-lg-8">
@@ -26,7 +39,7 @@
                 <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Sicilian Pizzas</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" src="{% static 'img/d1.jpg' %}" class="img-fluid" alt=""/>
+                    <img style="transform: none;" src="{% static 'img/sicilian.jpg' %}" class="img-fluid" alt=""/>
                 </div>
 
                 <!--table-->
@@ -43,12 +56,12 @@
                         <div class="table-row">
                             <div style="width: 20%; text-align:left;" class="visit"> {{ SPizza.name }}</div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ SPizza.price_small }}" name="{{ SPizza.name }}" itemname="Sicilian Pizzas" num="{{ forloop.counter0 }}">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ SPizza.price_small }}" size="small" name="{{ SPizza.name }}" itemfamily="Sicilian Pizzas" num="{{ forloop.counter0 }}">
                                     {{ SPizza.price_small }}
                                 </button>
                             </div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ SPizza.price_large }}" name="{{ SPizza.name }}" itemname="Sicilian Pizzas" num="{{ forloop.counter0 }}">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ SPizza.price_large }}" size="small" name="{{ SPizza.name }}" itemfamily="Sicilian Pizzas" num="{{ forloop.counter0 }}">
                                     {{ SPizza.price_large }}
                                 </button>
                             </div>
@@ -64,7 +77,7 @@
                 <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Regular Pizzas</h4>
                 <!--image-->
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid" src="{% static 'img/d2.jpg' %}" alt=""> <!--src="img/d2.jpg"-->
+                    <img style="transform: none;" class="img-fluid" src="{% static 'img/pizza.jpg' %}" alt=""> <!--src="img/d2.jpg"-->
                 </div>
 
                 <!--table-->
@@ -81,12 +94,12 @@
                         <div class="table-row">
                             <div style="width: 20%; text-align:left" class="visit"> {{ Pizza.name }}</div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ Pizza.price_small }}" name="{{ Pizza.name }}" itemname="Regular Pizzas" num="{{ forloop.counter0 }}">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ Pizza.price_small }}" size="small" name="{{ Pizza.name }}" itemfamily="Regular Pizzas" num="{{ forloop.counter0 }}">
                                     {{ Pizza.price_small }}
                                 </button>
                             </div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#ModalPizza" size="{{ Pizza.price_large }}" name="{{ Pizza.name }}" itemname="Regular Pizzas" num="{{ forloop.counter0 }}">
+                                <button style='color: #777;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ Pizza.price_large }}" size="large" name="{{ Pizza.name }}" itemfamily="Regular Pizzas" num="{{ forloop.counter0 }}">
                                     {{ Pizza.price_large }}
                                 </button>
                             </div>
@@ -102,7 +115,7 @@
                 <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Pasta</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/ziti.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
                 <div class="progress-table-wrap" style="overflow-x:hidden;">
@@ -120,7 +133,7 @@
 
                             <div class="serial"></div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ pasta.price }}" name="{{ pasta.name }}" itemname="Pasta">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ pasta.price }}" size="unique" name="{{ pasta.name }}" itemfamily="Pasta" num="{{ forloop.counter0 }}">
                                     {{ pasta.price }}
                                 </button>
                             </div>
@@ -138,7 +151,7 @@
                 <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Salads</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/salad.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
                 <div class="progress-table-wrap" style="overflow-x:hidden;">
@@ -156,7 +169,7 @@
 
                             <div class="serial"></div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ salad.price }}" name="{{ salad.name }}" itemname="Salad">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ salad.price }}" size="unique" name="{{ salad.name }}" itemfamily="Salad" num="{{ forloop.counter0 }}">
                                     {{ salad.price }}
                                 </button>
                             </div>
@@ -190,13 +203,13 @@
 
 
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ platter.price_small }}" name="{{ platter.name }}" itemname="Dinner Platter">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ platter.price_small }}" size="small" name="{{ platter.name }}" itemfamily="Dinner Platter" num="{{ forloop.counter0 }}">
                                     {{ platter.price_small }}
                                 </button>
                             </div>
 
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#exampleModal" size="{{ platter.price_large }}" name="{{ platter.name }}" itemname="Dinner Platter">
+                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ platter.price_large }}" size="large" name="{{ platter.name }}" itemfamily="Dinner Platter" num="{{ forloop.counter0 }}">
                                     {{ platter.price_large }}
                                 </button>
                             </div>
@@ -212,7 +225,7 @@
                 <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Subs</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/sub.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
                 <div class="progress-table-wrap" style="overflow-x:hidden;">
@@ -227,19 +240,13 @@
                         {% for sub in subs %}
                         <div class="table-row">
                             <div style="width: 20%; text-align:left" class="visit"> {{ sub.name }}</div>
-
-                            <!--
-                            {% if sub.name == "Steak + Cheese" %}
-                            <td>Add options</td>
-                            {% endif%}
-                            -->
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#subModal" size="{{ sub.price_small }}" name="{{ sub.name }}" itemname="Sub" >
+                                <button style='color: #777;' href='' id="link-sub" data-toggle="modal" data-target="#subModal" price="{{ sub.price_small }}" size="small" name="{{ sub.name }}" itemfamily="Sub" num="{{ forloop.counter0 }}">
                                     {{ sub.price_small }}
                                 </button>
                             </div>
                             <div class="serial">
-                                <button style='color: #777;' href='' id="link" data-toggle="modal" data-target="#subModal" size="{{ sub.price_large }}" name="{{ sub.name }}" itemname="Subs" >
+                                <button style='color: #777;' href='' id="link-sub" data-toggle="modal" data-target="#subModal" price="{{ sub.price_large }}" size="large" name="{{ sub.name }}" itemfamily="Subs" num="{{ forloop.counter0 }}">
                                     {{ sub.price_large }}
                                 </button>
                             </div>
@@ -249,10 +256,7 @@
                 </div>
             </div>
 
-
-
-
-
+            <!-- end of menu -->
 
         </div>
     </div>
@@ -260,23 +264,24 @@
 
 
 
+<!-- MODALS -->
 
-
-<!-- Subs Modal -->
-<div class="modal fade" id="subModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- ITEMS MODAL -->
+<div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="itemModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
           <form action="{% url 'menu' %}" method="post" id='form1'>
+              <ul class='item-description'>
+              </ul>
               {% csrf_token %}
-                <ul class='description'>
-                </ul>
+              {{ order_form }}
           </form>
       </div>
       <div class="modal-footer">
@@ -287,63 +292,23 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- PIZZA MODAL -->
+<div class="modal fade" id="pizzaModal" tabindex="-1" role="dialog" aria-labelledby="pizzaModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="pizzaModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <form action="{% url 'menu' %}" method="post" id='form1'>
-              {% csrf_token %}
-                <ul class='description'>
-                </ul>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="genric-btn default circle" data-dismiss="modal">Cancel</button>
-        <button type="submit" form="form1" class="genric-btn primary circle">Add to cart</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Pizza -->
-<div class="modal fade" id="ModalPizza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel-pizza">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form action="{% url 'menu' %}" method="post" id='form1-pizza'>
-              {% csrf_token %}
-                <ul class='description-pizza'>
-                </ul>
-          </form>
+           <form action="{% url 'menu' %}" method="post" id='form1-pizza'>
+               <ul class='description-pizza'>
+               </ul>
+               {% csrf_token %}
+               {{ pizza_form }}
+           </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="genric-btn default circle" data-dismiss="modal">Cancel</button>
@@ -353,52 +318,134 @@
   </div>
 </div>
 
+<!-- SUBS MODAL -->
+<div class="modal fade" id="subModal" tabindex="-1" role="dialog" aria-labelledby="subModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="subModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <div class="modal-body">
+           <form action="{% url 'menu' %}" method="post" id='form1-subs'>
+                 <ul class='description-subs'></ul>
+                 {% csrf_token %}
+                 {{ sub_form.sub_name }}
+                 {{ sub_form.sub_type }}
+                 {{ sub_form.sub_size }}
+                 {{ sub_form.sub_price }}
 
+                <div id="sublabel1">
+                     <label id="label1">Extra cheese (+$0.50) </label>
+                     {{ sub_form.extra_cheese }}
+				</div>
 
+                <div id="sublabel2">
+                    <label id="label2">Extra Green Pepper (+$0.50) </label>
+                    {{ sub_form.extra_green_pepper }}
 
+                </div>
 
-<!-- Close manu section -->
-</section>
+                <div id="sublabel3">
+                    <label id="label3">Extra Mushroom (+$0.50) </label>
+                    {{ sub_form.extra_mushroom }}
+
+                </div>
+
+                <div id="sublabel4">
+                    <label id="label4">Extra Onion (+$0.50) </label>
+                    {{ sub_form.extra_onion }}
+
+                </div>
+                 <!-- {{ sub_form.extra_cheese }} -->
+           </form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="genric-btn default circle" data-dismiss="modal">Cancel</button>
+         <button type="submit" form="form1-subs" class="genric-btn primary circle">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
 <script>
-
+    // for menu items
     // When someone clicks on the price
     document.querySelectorAll('#link').forEach(function(button) {
         button.onclick = function() {
 
             // Check if an item was already clicked
             // if yes, clear the item list
-            if (item != 0) {
-                let list = document.querySelector('.description');
+            if (family != 0) {
+                let list = document.querySelector('.item-description');
                 list.innerHTML = '';
-            }
+
+                document.querySelectorAll(".input").forEach(input => {
+                    input.remove();
+                });
+
+
+                // look for pizza toppings selectors and remove them
+                document.querySelectorAll("#selector").forEach(selector => {
+                    selector.remove();
+                });
+            };
 
             // Get item price and name
-            var item = button.attributes.itemname.value;
-            var price = button.attributes.size.value;
+            var size = button.attributes.size.value
+            var family = button.attributes.itemfamily.value;
+            var price = button.attributes.price.value;
             var name = button.attributes.name.value;
 
+            // dev // DEBUG:
+            console.log(family)
+            console.log(price)
+            console.log(name)
+            console.log(size)
+
             // Make a title to the modal window
-            document.querySelector('#exampleModalLabel').innerHTML =  item;
+            document.querySelector('#itemModalLabel').innerHTML =  family;
 
             // Make list items to add to modal
             let li1 = document.createElement('li');
-            li1.innerHTML = item + ' (' + name + ')';
+            li1.innerHTML = name;
 
             let li2 = document.createElement('li');
-            li2.innerHTML = price;
+            li2.innerHTML = size;
+
+            let li3 = document.createElement('li');
+            li3.innerHTML = price;
+
+            // get the input tags
+            let input1 = document.querySelector('#id_dish');
+            let input2 = document.querySelector('#id_type');
+            let input3 = document.querySelector('#id_size');
+            let input4 = document.querySelector('#id_price');
+
+            // set input values
+            input1.value = name;
+            input2.value = family;
+            input3.value = price;
+            input4.value = size;
 
             // Select the ul element
-            let list = document.querySelector('.description');
+            let list = document.querySelector('.item-description');
 
             // Append and magic happens
             list.appendChild(li1);
-            list.appendChild(li2);
+            if(family === "Dinner Platter"){
+                list.appendChild(li2);
+            }
+            list.appendChild(li3);
 
         };
     });
+
 
     // The same but now for pizza
     // When someone clicks on the price
@@ -407,7 +454,7 @@
 
             // Check if an item was already clicked
             // if yes, clear the item list and selectors
-            if (item != 0) {
+            if (family != 0) {
                 let list = document.querySelector('.description-pizza');
                 list.innerHTML = '';
 
@@ -415,12 +462,32 @@
                 document.querySelectorAll("#selector").forEach(selector => {
                     selector.remove();
                 });
+                // clear input tags if the user changes menu item
+                document.querySelectorAll(".input").forEach(input => {
+                    input.remove();
+                });
+
+                document.querySelector('#id_pizza_topping_1').style.visibility = "visible";
+                document.querySelector('#id_pizza_topping_2').style.visibility = "visible";
+                document.querySelector('#id_pizza_topping_3').style.visibility = "visible";
+                document.querySelector('#id_pizza_topping_4').style.visibility = "visible";
+
+                document.querySelector('[for=id_pizza_topping_1]').style.visibility = "visible";
+                document.querySelector('[for=id_pizza_topping_2]').style.visibility = "visible";
+                document.querySelector('[for=id_pizza_topping_3]').style.visibility = "visible";
+                document.querySelector('[for=id_pizza_topping_4]').style.visibility = "visible";
             }
 
             // Get item price and name
-            var item = button.attributes.itemname.value;
-            var price = button.attributes.size.value;
+            var size = button.attributes.size.value
+            var family = button.attributes.itemfamily.value;
+            var price = button.attributes.price.value;
             var name = button.attributes.name.value;
+
+            console.log(family)
+            console.log(price)
+            console.log(name)
+            console.log(size)
 
             // Get the form target
             var form = document.querySelector('#form1-pizza')
@@ -428,67 +495,279 @@
             // counter for toppings
             var loop = button.attributes.num.value;
             var numberOfLoops = parseInt(loop)
+            console.log(numberOfLoops)
 
             // Make a title to the modal window
-            document.querySelector('#exampleModalLabel-pizza').innerHTML =  item;
+            document.querySelector('#pizzaModalLabel').innerHTML = family;
 
             // Make list items to add to modal
             let listItem1 = document.createElement('li');
             let listItem2 = document.createElement('li');
-            listItem1.innerHTML = item + ' (' + name + ')';
-            listItem2.innerHTML = price;
+            let listItem3 = document.createElement('li');
+
+            // add the dish info to the list items
+            listItem1.innerHTML =  name;
+            listItem2.innerHTML = size;
+            listItem3.innerHTML = price;
 
             // Select the ul element
             let list = document.querySelector('.description-pizza');
 
-            // Append and magic happens
+            // Append dish info to the list
             list.appendChild(listItem1);
             list.appendChild(listItem2);
+            list.appendChild(listItem3);
 
-            // Add selectors depending on the amount of items
-            if(numberOfLoops == 0){
+            // get the input tags
+            let input1 = document.querySelector('#id_pizza_dish');
+            let input2 = document.querySelector('#id_pizza_type');
+            let input3 = document.querySelector('#id_pizza_size');
+            let input4 = document.querySelector('#id_pizza_price');
+            let input5 = document.querySelector('#id_num_of_topings');
 
-            } else if(numberOfLoops == 1){
-                var htmlString = "{% for value in "x"|ljust:"1" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
-                let div = document.createElement('div');
-                div.innerHTML = htmlString;
-                form.appendChild(div)
-            } else if(numberOfLoops == 2){
-                var htmlString = "{% for value in "x"|ljust:"2" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
-                let div = document.createElement('div');
-                div.innerHTML = htmlString;
-                form.appendChild(div)
-            } else if(numberOfLoops == 3){
-                var htmlString = "{% for value in "x"|ljust:"3" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
-                let div = document.createElement('div');
-                div.innerHTML = htmlString;
-                form.appendChild(div)
-            } else if(numberOfLoops == 4){
-                var htmlString = "{% for value in "x"|ljust:"4" %} <select id='selector'>  {% for topping in toppings %}<option value='{{ toping }}'>{{ topping }}</option>{% endfor %}  </select>{% endfor %}";
-                let div = document.createElement('div');
-                div.innerHTML = htmlString;
-                form.appendChild(div)
+
+            // fill them
+            input1.value = name;
+            input2.value = family;
+            input3.value = size;
+            input4.value = price;
+            input5.value = numberOfLoops;
+
+            // Hide extra selectors
+            if (numberOfLoops == 0){
+                document.querySelector('#id_pizza_topping_1').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_1]').style.visibility = "hidden";
+
+                document.querySelector('#id_pizza_topping_2').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_2]').style.visibility = "hidden";
+
+                document.querySelector('#id_pizza_topping_3').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_3]').style.visibility = "hidden";
+
+                document.querySelector('#id_pizza_topping_4').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_4]').style.visibility = "hidden";
+
+            } else if (numberOfLoops == 1){
+                document.querySelector('#id_pizza_topping_2').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_2]').style.visibility = "hidden";
+
+                document.querySelector('#id_pizza_topping_3').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_3]').style.visibility = "hidden";
+
+                document.querySelector('#id_pizza_topping_4').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_4]').style.visibility = "hidden";
+
+            } else if (numberOfLoops == 2){
+                document.querySelector('#id_pizza_topping_3').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_3]').style.visibility = "hidden";
+
+                document.querySelector('#id_pizza_topping_4').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_4]').style.visibility = "hidden";
+
+            } else if (numberOfLoops == 3){
+                document.querySelector('#id_pizza_topping_4').style.visibility = "hidden";
+                document.querySelector('[for=id_pizza_topping_4]').style.visibility = "hidden";
+
+
             }
         };
     });
 
 
-    function submitform()
-    {
-      document.myform.submit();
-    }
+
+
+    // The same but now for subs
+    // When someone clicks on the price
+    document.querySelectorAll('#link-sub').forEach(function(button) {
+        button.onclick = function() {
+
+            // Check if an item was already clicked
+            // if yes, clear the item list and selectors
+            if (family != 0) {
+                let list = document.querySelector('.description-subs');
+                list.innerHTML = '';
+
+                document.querySelector('#sublabel1').style.visibility = "visible";
+                document.querySelector('#sublabel2').style.visibility = "visible";
+                document.querySelector('#sublabel3').style.visibility = "visible";
+                document.querySelector('#sublabel4').style.visibility = "visible";
+
+                //document.querySelector('#id_extra_mushroom').style.visibility = "hidden";
+                //document.querySelector('#id_extra_onion').style.visibility = "hidden";
+
+                document.querySelector('#id_extra_green_pepper').style.visibility = "visible";
+                document.querySelector('#label2').style.visibility = "visible";
+
+                document.querySelector('#id_extra_mushroom').style.visibility = "visible";
+                document.querySelector('#label3').style.visibility = "visible";
+
+                document.querySelector('#id_extra_onion').style.visibility = "visible";
+                document.querySelector('#label4').style.visibility = "visible";
+            }
+
+            // Get item price and name
+            var size = button.attributes.size.value
+            var family = button.attributes.itemfamily.value;
+            var price = button.attributes.price.value;
+            var name = button.attributes.name.value;
+
+            // Get the form target
+            var form = document.querySelector('#form1-subs')
+
+            // Make a title to the modal window
+            document.querySelector('#subModalLabel').innerHTML =  family;
+
+            // Make list items to add to modal
+            let listItem1 = document.createElement('li');
+            let listItem2 = document.createElement('li');
+            let listItem3 = document.createElement('li');
+
+            // add the dish info to the list items
+            listItem1.innerHTML = name;
+            listItem2.innerHTML = size;
+            listItem3.innerHTML = price;
+
+            // Select the ul element
+            let list = document.querySelector('.description-subs');
+
+            // Append and magic happens
+            list.appendChild(listItem1);
+            list.appendChild(listItem2);
+            list.appendChild(listItem3);
+            //list.appendChild(separator);
+
+            // Make list items to add to modal
+            let input1 = document.querySelector('#id_sub_name');
+            let input2 = document.querySelector('#id_sub_type');
+            let input3 = document.querySelector('#id_sub_size');
+            let input4 = document.querySelector('#id_sub_price');
+
+            // add name and price to list
+            input1.value = name;
+            input2.value = family;
+            input3.value = size;
+            input4.value = price;
+
+            // make form invisible
+            //document.querySelector('#id_sub_name').style.visibility = "hidden";
+            //document.querySelector('#id_sub_type').style.visibility = "hidden";
+            //document.querySelector('#id_sub_size').style.visibility = "hidden";
+            //document.querySelector('#id_sub_price').style.visibility = "hidden";
+
+
+            //
+            let input5 = document.querySelector('#id_extra_cheese');
+            let input6 = document.querySelector('#id_extra_green_pepper');
+            let input7 = document.querySelector('#id_extra_mushroom');
+            let input8 = document.querySelector('#id_extra_onion');
+
+
+            if(name === "Steak + Cheese"){
+                document.querySelector('#id_extra_cheese').style.visibility = "visible";
+                document.querySelector('#label1]').style.visibility = "visible";
+
+                document.querySelector('#id_extra_green_pepper').style.visibility = "visible";
+                document.querySelector('#label2').style.visibility = "visible";
+
+                document.querySelector('#id_extra_mushroom').style.visibility = "visible";
+                document.querySelector('#label3').style.visibility = "visible";
+
+                document.querySelector('#id_extra_onion').style.visibility = "visible";
+                document.querySelector('#label4').style.visibility = "visible";
+
+            } else {
+                document.querySelector('#id_extra_green_pepper').style.visibility = "hidden";
+                document.querySelector('#label2').style.visibility = "hidden";
+
+                document.querySelector('#id_extra_mushroom').style.visibility = "hidden";
+                document.querySelector('#label3').style.visibility = "hidden";
+
+                document.querySelector('#id_extra_onion').style.visibility = "hidden";
+                document.querySelector('#label4').style.visibility = "hidden";
+            }
+
+        }
+
+    });
 
 </script>
+
+
+
 <style>
-    #link {
+
+    #id_sub_name, #id_sub_type, #id_sub_size, #id_sub_price,#id_type, #id_dish, #id_size, #id_price, #id_pizza_dish, #id_pizza_size, #id_pizza_price, #id_pizza_type, #id_num_of_topings {
+        position: absolute;
+        left: -999em;
+        visibility: hidden;
+        height: 0px;
+        margin:0px;
+        padding:0px;
+        font-size:0;
+        line-height:0;
+        border-radius: 0px;
+
+    }
+    [for=id_sub_name], [for=id_sub_type], [for=id_sub_size], [for=id_type], [for=id_dish], [for=id_size], [for=id_price], [for=id_pizza_dish], [for=id_pizza_size], [for=id_pizza_price], [for=id_pizza_type], [for=id_num_of_topings], .errorlist{
+        position: absolute;
+        left: -999em;
+        visibility: hidden;
+        height: 0px;
+        margin:0px;
+        padding:0px;
+        font-size:0;
+        line-height:0;
+        border-radius: 0px;
+    }
+
+    #link, #link-pizza, #link-sub {
         background: none!important;
         border: none;
         padding: 0!important;
     }
-    #link-pizza {
-        background: none!important;
-        border: none;
-        padding: 0!important;
+
+    .alert{
+        padding: 20px;
+        background-color: limegreen;
+        color: white;
+        position: fixed;
+        right:0;
+        top:50px;
+        margin:20px;
+        float: right;
+        transition: opacity 0.6s;
+        overflow: hidden;
+        -webkit-animation: cssAnimation 5s forwards;
+        animation: cssAnimation 5s forwards;
+    }
+
+    @keyframes cssAnimation {
+        0%   {opacity: 1;}
+        90%  {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    @-webkit-keyframes cssAnimation {
+        0%   {opacity: 1;}
+        90%  {opacity: 1;}
+        100% {opacity: 0;}
+    }
+
+
+/* The close button */
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    /* When moving the mouse over the close button */
+    .closebtn:hover {
+      color: black;
     }
 </style>
 
