@@ -57,7 +57,6 @@ def menu(request):
             print("pizza form",dish,type,size,price,num_of_topings,topping1,topping2,topping3,topping4)
 
         elif sub_form.is_valid():
-            print(sub_form)
 
             # get data from form
             sub_name = sub_form.cleaned_data['sub_name']
