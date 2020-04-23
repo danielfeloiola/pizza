@@ -51,9 +51,17 @@
 			        <ul class="nav-menu">
 			          <li class="menu"><a href="/">Home</a></li>
                       <li class="menu"><a href="{% url 'menu' %}">Menu</a></li>
-                      <li><a href="#chefs">Directions</a></li>
-                      <li><a href="#blog">Hours</a></li>
-			          <li><a href="#contact">Contact</a></li>
+                      <!--<li><a href="#chefs">Directions</a></li> -->
+
+
+                      {% if user.cart_items != "0" %}
+                          <li class="menu-has-children"><a href="">Cart ( {{user.cart_items}} )</a></li>
+                      {% else %}
+                          <li class="menu-has-children"><a href="">Cart</a></li>
+                      {% endif %}
+
+                      <!--<li><a href="#blog">Hours</a></li>
+			          <li><a href="#contact">Contact</a></li>-->
 
                       {% if user.is_authenticated %}
                       <li class="menu-has-children"><a href="">Account</a>

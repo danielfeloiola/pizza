@@ -18,6 +18,8 @@ orders/forms.py
 
 orders/models.py
 - created a class for each menu item/topping
+- created a class for the shopping cart
+- created a class for each cart item in the shopping cart
 
 orders/urls.py
 - added url for the menu and index pages
@@ -25,7 +27,7 @@ orders/urls.py
 orders/views.py:
 - added the index funtion, to load the index page
 - added the menu function, with GET (to to show the menu) and POST (to add items to cart)
-- 
+-
 
 orders/templates/registration
 - added login and password reset templates
@@ -41,6 +43,7 @@ users/forms.py
 
 users/models.py
 - Created a custom user class used in user/forms.py
+- Added the number of cart items in the user model
 
 users/urls.py
 - added url for the registration
