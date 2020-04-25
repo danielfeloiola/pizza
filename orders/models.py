@@ -14,7 +14,6 @@ class RegularPizza(models.Model):
     name = models.CharField(max_length=64)
     price_small = models.CharField(max_length=64)
     price_large = models.CharField(max_length=64)
-
     toppings = models.ManyToManyField(Topping, blank=True, name="toppings")
 
     def __str__(self):
@@ -24,7 +23,6 @@ class SicilianPizza(models.Model):
     name = models.CharField(max_length=64)
     price_small = models.CharField(max_length=64)
     price_large = models.CharField(max_length=64)
-
     toppings = models.ManyToManyField(Topping, blank=True, name="toppings")
 
     def __str__(self):
@@ -68,24 +66,24 @@ class Pasta(models.Model):
 
 class CartItem(models.Model):
 
+    # dish info
     dish = models.CharField(max_length=64)
     type = models.CharField(max_length=64)
     size = models.CharField(max_length=64)
-    price = models.IntegerField()
+    price = models.FloatField()
 
+    # pizza toppings
     num_of_topings = models.IntegerField(blank=True, null=True)
     topping1 = models.CharField(max_length=64, blank=True, null=True)
     topping2 = models.CharField(max_length=64, blank=True, null=True)
     topping3 = models.CharField(max_length=64, blank=True, null=True)
     topping4 = models.CharField(max_length=64, blank=True, null=True)
 
+    # subs extrs
     extra_cheese = models.NullBooleanField(blank=True)
     extra_green_pepper = models.NullBooleanField(blank=True)
     extra_mushroom = models.NullBooleanField(blank=True)
     extra_onion = models.NullBooleanField(blank=True)
-
-    #orders.CartItem.extra_onion: (fields.E110) BooleanFields do not accept null values.
-	#HINT: Use a NullBooleanField instead.
 
     def __str__(self):
         return f"{self.dish}, {self.type}, {self.size}, {self.price}"
@@ -93,9 +91,7 @@ class CartItem(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
     item = models.ManyToManyField(CartItem, blank=True, name="item")
-    #item = models.ForeignKey(CartItem, on_delete=models.CASCADE, name="item", blank=True, null=True)
 
     def __str__(self):
         return f"{self.user}"

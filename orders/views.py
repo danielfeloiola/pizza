@@ -13,14 +13,20 @@ from users.models import CustomUser
 
 
 def index(request):
+    """Render the home page"""
+
     #return HttpResponse("Project 3: TODO")
     return render(request, "index.html")
 
 def menu(request):
+    """Show the menu cart and allows the user to add items to cart"""
 
-    ###########################################
-    #               POST REQUEST              #
-    ###########################################
+    # TODO:
+    ############################################################
+    # FORCE 2 DECIMAL ON FLOAT VALUES
+    # DO THE MATH USING INTEGERS
+    ############################################################
+
     if request.method == 'POST':
 
         # make the form
@@ -36,7 +42,7 @@ def menu(request):
             type = order_form.cleaned_data['type']
             # for some reason size and price got mixed up
             price = order_form.cleaned_data['size']
-            price = float(price)*100
+            price = float(price)
             size = order_form.cleaned_data['price']
 
             # Make a cart item
@@ -55,6 +61,7 @@ def menu(request):
             type = pizza_form.cleaned_data['pizza_type']
             size = pizza_form.cleaned_data['pizza_size']
             price = pizza_form.cleaned_data['pizza_price']
+            price = float(price)
             num_of_topings = pizza_form.cleaned_data['num_of_topings']
             topping1 = pizza_form.cleaned_data['pizza_topping_1']
             topping2 = pizza_form.cleaned_data['pizza_topping_2']
@@ -77,6 +84,7 @@ def menu(request):
             sub_type = sub_form.cleaned_data['sub_type']
             sub_size = sub_form.cleaned_data['sub_size']
             sub_price = sub_form.cleaned_data['sub_price']
+            sub_price = float(sub_price)
             extra_cheese = sub_form.cleaned_data['extra_cheese']
             extra_green_pepper = sub_form.cleaned_data['extra_green_pepper']
             extra_mushroom = sub_form.cleaned_data['extra_mushroom']
@@ -90,13 +98,6 @@ def menu(request):
                                 extra_mushroom = extra_mushroom,
                                 extra_onion = extra_onion)
             item.save()
-
-
-
-
-        ##########################################
-        # FIX INT ISSUE ON THE PIZZA ITEMS!!!!!!!#
-        ##########################################
 
         # Check for a shopping cart. If there is none, then make one
         try:
@@ -113,13 +114,11 @@ def menu(request):
         # also update on the request so the number on top of tha page is updated
         num = cart.item.all().count()
         user = CustomUser.objects.filter(id = request.user.id).get()
-        user.cart_items = num
+        user.cart_items += 1
         request.user.cart_items = num
 
         # and save
         user.save()
-
-
 
         # make context and render template
         context = {
@@ -137,12 +136,6 @@ def menu(request):
         }
         return render(request, "menu.html", context)
 
-
-
-
-    ###########################################
-    #               GET REQUEST               #
-    ###########################################
     elif request.method == 'GET':
 
         order_form = OrderForm()
@@ -163,3 +156,82 @@ def menu(request):
         }
 
         return render(request,"menu.html", context)
+
+
+def cart(request):
+    """Show the shopping cart and allows the user to place an order"""
+    #return HttpResponse("this is the cart")
+
+    # show the cart
+    if request.method == 'GET':
+
+        # filter carts by users
+        cart = Cart.objects.filter(user = request.user).get()
+
+        # add cart items to context
+        context = {
+            "CartItems": cart.item.all(),
+        }
+
+        # and render page
+        return render(request,"cart.html", context)
+
+    # if removing items or palcing oreders
+    elif request.method == "POST":
+
+        # check if placing an order or clearing cart or deleting item
+        if request.POST['order'] == "Clear Cart":
+
+            # get cart and user
+            cart = Cart.objects.filter(user = request.user).get()
+            user = CustomUser.objects.filter(id = request.user.id).get()
+
+            # delete all the stuff and adjust num of itmes
+            cart.item.all().delete()
+            user.cart_items = 0
+            request.user.cart_items = None
+
+            # save data
+            cart.save()
+            user.save()
+
+            # make context
+            context = {
+                "CartItems": cart.item.all(),
+            }
+
+            # and now render page
+            return render(request,"cart.html", context)
+
+        # placing the order
+        elif request.POST['order'] == "Place Order":
+            pass
+
+            return render(request,"confirm.html")
+
+        #if deleting a single item from the cart
+        else:
+
+            # get item to delete from post request
+            item_to_delete = int(request.POST['order'])
+
+            # get cart and user
+            cart = Cart.objects.filter(user = request.user).get()
+            user = CustomUser.objects.filter(id = request.user.id).get()
+
+            # calculate the amount of items
+            cart.item.filter()[item_to_delete - 1].delete()
+            user.cart_items -= 1
+            request.user.cart_items = user.cart_items
+
+            # save data
+            cart.save()
+            user.save()
+
+            # make context
+            context = {
+                "CartItems": cart.item.all(),
+            }
+
+            # and now render page
+            return render(request,"cart.html", context)
