@@ -29,6 +29,9 @@ def menu(request):
 
     if request.method == 'POST':
 
+        # get the users
+        user = CustomUser.objects.filter(id = request.user.id).get()
+
         # make the form
         order_form = OrderForm(request.POST)
         pizza_form = PizzaForm(request.POST)
@@ -48,11 +51,14 @@ def menu(request):
             # Make a cart item
             item = CartItem(dish=dish, type=type, size=size, price=price, num_of_topings=0,
                                 topping1=None, topping2=None,topping3=None,topping4=None,
-                                extra_cheese = None,
-                                extra_green_pepper=None,
-                                extra_mushroom = None,
-                                extra_onion=None)
+                                sub_extras_count = 0,
+                                extra_1 = None,
+                                extra_2 = None,
+                                extra_3 = None,
+                                extra_4 = None)
             item.save()
+
+            user.cart_total += price
 
         elif pizza_form.is_valid():
 
@@ -71,11 +77,14 @@ def menu(request):
             # Make a cart item
             item = CartItem(dish=dish, type=type, size=size, price=price, num_of_topings=num_of_topings,
                                 topping1=topping1, topping2=topping2,topping3=topping3,topping4=topping4,
-                                extra_cheese = None,
-                                extra_green_pepper=None,
-                                extra_mushroom = None,
-                                extra_onion=None)
+                                sub_extras_count = 0,
+                                extra_1 = None,
+                                extra_2 = None,
+                                extra_3 = None,
+                                extra_4 = None)
             item.save()
+
+            user.cart_total += price
 
         elif sub_form.is_valid():
 
@@ -84,20 +93,102 @@ def menu(request):
             sub_type = sub_form.cleaned_data['sub_type']
             sub_size = sub_form.cleaned_data['sub_size']
             sub_price = sub_form.cleaned_data['sub_price']
-            sub_price = float(sub_price)
+            # transform in int to avoid floting point issues
+            sub_price = int(float(sub_price)*100)
             extra_cheese = sub_form.cleaned_data['extra_cheese']
             extra_green_pepper = sub_form.cleaned_data['extra_green_pepper']
             extra_mushroom = sub_form.cleaned_data['extra_mushroom']
             extra_onion = sub_form.cleaned_data['extra_onion']
 
-            # Make a cart item
-            item = CartItem(dish = sub_name, type = sub_type, size = sub_size, price = sub_price, num_of_topings = 0,
-                                topping1 = None, topping2 = None, topping3 = None, topping4 = None,
-                                extra_cheese = extra_cheese,
-                                extra_green_pepper = extra_green_pepper,
-                                extra_mushroom = extra_mushroom,
-                                extra_onion = extra_onion)
-            item.save()
+            extras_count = 0
+            extras = []
+
+            # add extras...
+            if extra_cheese == True:
+                sub_price += 50
+                extras_count += 1
+                extras.append("cheese")
+            if extra_green_pepper == True:
+                sub_price += 50
+                extras_count += 1
+                extras.append("green pepper")
+            if extra_mushroom == True:
+                sub_price += 50
+                extras_count += 1
+                extras.append("mushroom")
+            if extra_onion == True:
+                sub_price += 50
+                extras_count += 1
+                extras.append("onion")
+
+            # and back to floating point value for aesthetics
+            sub_price = float(sub_price/100)
+
+            if extras_count == 0:
+                # Make a cart item
+                item = CartItem(dish = sub_name, type = sub_type, size = sub_size, price = sub_price, num_of_topings = 0,
+                                    topping1 = None, topping2 = None, topping3 = None, topping4 = None,
+                                    sub_extras_count = extras_count,
+                                    extra_1 = None,
+                                    extra_2 = None,
+                                    extra_3 = None,
+                                    extra_4 = None)
+                item.save()
+
+                user.cart_total += sub_price
+
+            if extras_count == 1:
+                # Make a cart item
+                item = CartItem(dish = sub_name, type = sub_type, size = sub_size, price = sub_price, num_of_topings = 0,
+                                    topping1 = None, topping2 = None, topping3 = None, topping4 = None,
+                                    sub_extras_count = extras_count,
+                                    extra_1 = extras[0],
+                                    extra_2 = None,
+                                    extra_3 = None,
+                                    extra_4 = None)
+                item.save()
+
+                user.cart_total += sub_price
+
+            if extras_count == 2:
+                # Make a cart item
+                item = CartItem(dish = sub_name, type = sub_type, size = sub_size, price = sub_price, num_of_topings = 0,
+                                    topping1 = None, topping2 = None, topping3 = None, topping4 = None,
+                                    sub_extras_count = extras_count,
+                                    extra_1 = extras[0],
+                                    extra_2 = extras[1],
+                                    extra_3 = None,
+                                    extra_4 = None)
+                item.save()
+
+                user.cart_total += sub_price
+
+
+            if extras_count == 3:
+                # Make a cart item
+                item = CartItem(dish = sub_name, type = sub_type, size = sub_size, price = sub_price, num_of_topings = 0,
+                                    topping1 = None, topping2 = None, topping3 = None, topping4 = None,
+                                    sub_extras_count = extras_count,
+                                    extra_1 = extras[0],
+                                    extra_2 = extras[1],
+                                    extra_3 = extras[2],
+                                    extra_4 = None)
+                item.save()
+
+                user.cart_total += sub_price
+
+            if extras_count == 4:
+                # Make a cart item
+                item = CartItem(dish = sub_name, type = sub_type, size = sub_size, price = sub_price, num_of_topings = 0,
+                                    topping1 = None, topping2 = None, topping3 = None, topping4 = None,
+                                    sub_extras_count = extras_count,
+                                    extra_1 = extras[0],
+                                    extra_2 = extras[1],
+                                    extra_3 = extras[2],
+                                    extra_4 = extras[3])
+                item.save()
+
+                user.cart_total += sub_price
 
         # Check for a shopping cart. If there is none, then make one
         try:
@@ -113,7 +204,7 @@ def menu(request):
         # save number of cart items on the user object
         # also update on the request so the number on top of tha page is updated
         num = cart.item.all().count()
-        user = CustomUser.objects.filter(id = request.user.id).get()
+        #user = CustomUser.objects.filter(id = request.user.id).get()
         user.cart_items += 1
         request.user.cart_items = num
 

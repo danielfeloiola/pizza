@@ -32,6 +32,7 @@ class Sub(models.Model):
     name = models.CharField(max_length=64)
     price_small = models.CharField(max_length=64, blank=True)
     price_large = models.CharField(max_length=64)
+
     extra_cheese = models.BooleanField(max_length=64)
 
     if name == 'Steak + Cheese':
@@ -79,11 +80,12 @@ class CartItem(models.Model):
     topping3 = models.CharField(max_length=64, blank=True, null=True)
     topping4 = models.CharField(max_length=64, blank=True, null=True)
 
+    sub_extras_count = models.IntegerField(blank=True, null=True)
     # subs extrs
-    extra_cheese = models.NullBooleanField(blank=True)
-    extra_green_pepper = models.NullBooleanField(blank=True)
-    extra_mushroom = models.NullBooleanField(blank=True)
-    extra_onion = models.NullBooleanField(blank=True)
+    extra_1 = models.CharField(max_length=64, blank=True, null=True)
+    extra_2 = models.CharField(max_length=64, blank=True, null=True)
+    extra_3 = models.CharField(max_length=64, blank=True, null=True)
+    extra_4 = models.CharField(max_length=64, blank=True, null=True)
 
     def __str__(self):
         return f"{self.dish}, {self.type}, {self.size}, {self.price}"
