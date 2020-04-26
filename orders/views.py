@@ -21,16 +21,18 @@ def index(request):
 def menu(request):
     """Show the menu cart and allows the user to add items to cart"""
 
-    # TODO:
-    ############################################################
-    # FORCE 2 DECIMAL ON FLOAT VALUES
-    # DO THE MATH USING INTEGERS
-    ############################################################
 
     if request.method == 'POST':
 
         # get the users
         user = CustomUser.objects.filter(id = request.user.id).get()
+
+        # check for a cart and make one if there is none
+        try:
+            cart = Cart.objects.filter(user = request.user).get()
+        except:
+            cart = Cart(user=request.user)
+            cart.save()
 
         # make the form
         order_form = OrderForm(request.POST)
@@ -94,7 +96,7 @@ def menu(request):
             sub_size = sub_form.cleaned_data['sub_size']
             sub_price = sub_form.cleaned_data['sub_price']
             # transform in int to avoid floting point issues
-            sub_price = int(float(sub_price)*100)
+            sub_price = int(round(float(sub_price)*100))
             extra_cheese = sub_form.cleaned_data['extra_cheese']
             extra_green_pepper = sub_form.cleaned_data['extra_green_pepper']
             extra_mushroom = sub_form.cleaned_data['extra_mushroom']
@@ -111,15 +113,15 @@ def menu(request):
             if extra_green_pepper == True:
                 sub_price += 50
                 extras_count += 1
-                extras.append("green pepper")
+                extras.append("green peppers")
             if extra_mushroom == True:
                 sub_price += 50
                 extras_count += 1
-                extras.append("mushroom")
+                extras.append("mushrooms")
             if extra_onion == True:
                 sub_price += 50
                 extras_count += 1
-                extras.append("onion")
+                extras.append("onions")
 
             # and back to floating point value for aesthetics
             sub_price = float(sub_price/100)
@@ -190,21 +192,17 @@ def menu(request):
 
                 user.cart_total += sub_price
 
-        # Check for a shopping cart. If there is none, then make one
-        try:
-            cart = Cart.objects.filter(user = request.user).get()
-        except:
-            cart = Cart(user=request.user)
-            cart.save()
+
 
         # add the selected item to the cart
         cart.item.add(item)
 
         # get the number of items in the cart, and the user id
         # save number of cart items on the user object
-        # also update on the request so the number on top of tha page is updated
+        # also update on the request so the number on top of th3 page is updated
         num = cart.item.all().count()
-        #user = CustomUser.objects.filter(id = request.user.id).get()
+
+        # variables needed to show the num of cart items at the top
         user.cart_items += 1
         request.user.cart_items = num
 
@@ -260,6 +258,7 @@ def cart(request):
         cart = Cart.objects.filter(user = request.user).get()
 
         # add cart items to context
+        # make context
         context = {
             "CartItems": cart.item.all(),
         }
@@ -280,12 +279,14 @@ def cart(request):
             # delete all the stuff and adjust num of itmes
             cart.item.all().delete()
             user.cart_items = 0
+            user.cart_total = 0.00
             request.user.cart_items = None
 
             # save data
             cart.save()
             user.save()
 
+            # make context
             # make context
             context = {
                 "CartItems": cart.item.all(),
@@ -297,6 +298,19 @@ def cart(request):
         # placing the order
         elif request.POST['order'] == "Place Order":
             pass
+
+
+            #################################################
+            # TODO
+            #################################################
+
+
+
+
+
+
+
+
 
             return render(request,"confirm.html")
 
