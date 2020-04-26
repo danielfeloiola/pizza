@@ -96,4 +96,11 @@ class Cart(models.Model):
     item = models.ManyToManyField(CartItem, blank=True, name="item")
 
     def __str__(self):
+        return f"{self.user} - {self.item}"
+
+class Order(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    item = models.ManyToManyField(CartItem, blank=True, name="item")
+
+    def __str__(self):
         return f"{self.user}"

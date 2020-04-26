@@ -28,6 +28,7 @@ orders/views.py:
 - added the index funtion, to load the index page
 - added the menu function, with GET (to to show the menu) and POST (to add items to cart)
 - added the cart function w/ GET and POST (remove items from cart and place order)
+- added the orders function so we can view placed orders (needs some fixing)
 
 orders/templates/registration
 - added login and password reset templates

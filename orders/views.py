@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Sum
 from .forms import OrderForm, PizzaForm, SubForm
-from .models import Salad,DinnerPlatter,Pasta,Sub,RegularPizza,SicilianPizza,Topping, Cart, CartItem
+from .models import Salad,DinnerPlatter,Pasta,Sub,RegularPizza,SicilianPizza,Topping, Cart, CartItem, Order
 from users.models import CustomUser
 
 
@@ -306,10 +306,24 @@ def cart(request):
 
 
 
+            order = Order(user=request.user)
+            order.save()
 
 
+            cart = Cart.objects.filter(user = request.user).get()
 
+            for element in cart.item.all():
+                #print(object)
+                order.item.add(element)
 
+            #for element in order.item.all():
+                #print(object)
+                #print(element)
+
+            cart.item.all().delete()
+
+            ## DO THE EMAIL THING HERE
+            ## CREATE ORDERS VIEW
 
 
             return render(request,"confirm.html")
@@ -340,3 +354,29 @@ def cart(request):
 
             # and now render page
             return render(request,"cart.html", context)
+
+
+
+
+def orders(request):
+
+
+    orders = Order.objects.all()
+
+
+
+
+    #print(orders)
+
+    for order in orders:
+        print("-------------")
+        print(order.item.all())
+        #for item in element:
+            #print(item)
+    context = {
+        "CartItems": order.item.all(),
+    }
+
+    # and now render page
+
+    return render(request,"orders.html", context)
