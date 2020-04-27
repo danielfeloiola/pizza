@@ -51,7 +51,6 @@
 			        <ul class="nav-menu">
 			          <li class="menu"><a href="/">Home</a></li>
                       <li class="menu"><a href="{% url 'menu' %}">Menu</a></li>
-                      <!--<li><a href="#chefs">Directions</a></li> -->
 
                       <!-- using two conditions, for user with and without a cart -->
                       {% if user.cart_items is None %}
@@ -62,8 +61,10 @@
                           <li class="menu-has-children"><a href="{% url 'cart' %}">Cart ( {{user.cart_items}} )</a></li>
                       {% endif %}
 
-                      <!--<li><a href="#blog">Hours</a></li>
-			          <li><a href="#contact">Contact</a></li>-->
+                      {% if user.is_superuser %}
+                          <li class="menu-has-children"><a href="{% url 'orders' %}">Orders</a></li>
+                      {% endif %}
+
 
                       {% if user.is_authenticated %}
                       <li class="menu-has-children"><a href="">Account</a>

@@ -7,6 +7,10 @@ from django.db.models import Sum
 from .forms import OrderForm, PizzaForm, SubForm
 from .models import Salad,DinnerPlatter,Pasta,Sub,RegularPizza,SicilianPizza,Topping, Cart, CartItem, Order
 from users.models import CustomUser
+from django.core.exceptions import PermissionDenied
+from django.template.loader import get_template
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 
 
 # Create your views here.
@@ -249,16 +253,18 @@ def menu(request):
 
 def cart(request):
     """Show the shopping cart and allows the user to place an order"""
-    #return HttpResponse("this is the cart")
 
     # show the cart
     if request.method == 'GET':
 
-        # filter carts by users
-        cart = Cart.objects.filter(user = request.user).get()
+        # check for a cart and make one if there is none
+        try:
+            cart = Cart.objects.filter(user = request.user).get()
+        except:
+            cart = Cart(user=request.user)
+            cart.save()
 
         # add cart items to context
-        # make context
         context = {
             "CartItems": cart.item.all(),
         }
@@ -287,7 +293,6 @@ def cart(request):
             user.save()
 
             # make context
-            # make context
             context = {
                 "CartItems": cart.item.all(),
             }
@@ -297,35 +302,53 @@ def cart(request):
 
         # placing the order
         elif request.POST['order'] == "Place Order":
-            pass
 
-
-            #################################################
-            # TODO
-            #################################################
-
-
-
+            # create the order object
             order = Order(user=request.user)
             order.save()
 
-
+            # get the user and cart
+            user = CustomUser.objects.filter(id = request.user.id).get()
             cart = Cart.objects.filter(user = request.user).get()
 
+            # Get user data for the email
+            username = user.username
+            email = user.email
+
+            # set up the confirmation email
+            html_template = get_template('email-receipt.html')
+            d = {
+                'username': username,
+                "CartItems": cart.item.all(),
+            }
+            subject, from_email, to = "Your Pinocchio's Order", 'noreply@pinocchiospizza.net', email
+            html_content = html_template.render(d)
+            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+
+            # add all cart items to the order and remove from cart
             for element in cart.item.all():
-                #print(object)
                 order.item.add(element)
+                cart.item.remove(element)
 
-            #for element in order.item.all():
-                #print(object)
-                #print(element)
+            # get the order total from the user object
+            order.order_total = user.cart_total
 
-            cart.item.all().delete()
+            # clear the cart
+            #cart.item.all().delete()
+            user.cart_items = 0
+            user.cart_total = 0.00
+            request.user.cart_items = None
 
-            ## DO THE EMAIL THING HERE
-            ## CREATE ORDERS VIEW
+            # send the EMAIL
+            msg.send()
 
+            # save data
+            cart.save()
+            user.save()
+            order.save()
 
+            # render the confirmation page
             return render(request,"confirm.html")
 
         #if deleting a single item from the cart
@@ -357,26 +380,28 @@ def cart(request):
 
 
 
-
 def orders(request):
+    """Show the placed orders"""
 
+    # CHECK IF USER IS SUPERUSER
+    user = CustomUser.objects.filter(id = request.user.id).get()
+    if not user.is_superuser:
+        raise PermissionDenied
 
+    # get the orders
     orders = Order.objects.all()
 
+    # DO AN ERROR CHECK HERE IN CASE THERE IS NO ORDERS!
 
-
-
-    #print(orders)
-
+    # get items for each order
     for order in orders:
-        print("-------------")
-        print(order.item.all())
-        #for item in element:
-            #print(item)
+        items = order.item.all()
+
+    # make context to the webpage
     context = {
-        "CartItems": order.item.all(),
+        "CartItems": items,
+        "orders": orders
     }
 
     # and now render page
-
     return render(request,"orders.html", context)
