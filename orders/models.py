@@ -105,3 +105,16 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.user}"
+
+class Hour(models.Model):
+    sun = models.CharField(max_length=64, blank=True, null=True)
+    mon = models.CharField(max_length=64, blank=True, null=True)
+    tue = models.CharField(max_length=64, blank=True, null=True)
+    wed = models.CharField(max_length=64, blank=True, null=True)
+    thu = models.CharField(max_length=64, blank=True, null=True)
+    fri = models.CharField(max_length=64, blank=True, null=True)
+    sat = models.CharField(max_length=64, blank=True, null=True)
+    msg = models.CharField(max_length=64, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.sun}, {self.mon}, {self.tue}, {self.wed}"

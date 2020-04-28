@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Sum
 from .forms import OrderForm, PizzaForm, SubForm
-from .models import Salad,DinnerPlatter,Pasta,Sub,RegularPizza,SicilianPizza,Topping, Cart, CartItem, Order
+from .models import Salad,DinnerPlatter,Pasta,Sub,RegularPizza,SicilianPizza,Topping, Cart, CartItem, Order, Hour
 from users.models import CustomUser
 from django.core.exceptions import PermissionDenied
 from django.template.loader import get_template
@@ -19,8 +19,18 @@ from django.core.mail import EmailMultiAlternatives
 def index(request):
     """Render the home page"""
 
+    # get the hours
+    hours = Hour.objects.all()
+
+    print(hours)
+
+    # context
+    context = {
+        "hours": hours,
+    }
+
     #return HttpResponse("Project 3: TODO")
-    return render(request, "index.html")
+    return render(request, "index.html", context)
 
 def menu(request):
     """Show the menu cart and allows the user to add items to cart"""
