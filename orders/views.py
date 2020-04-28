@@ -22,8 +22,6 @@ def index(request):
     # get the hours
     hours = Hour.objects.all()
 
-    print(hours)
-
     # context
     context = {
         "hours": hours,
