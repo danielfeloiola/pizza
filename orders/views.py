@@ -264,10 +264,15 @@ def cart(request):
             cart = Cart(user=request.user)
             cart.save()
 
-        # add cart items to context
+        # get user object
+        user = CustomUser.objects.filter(id = request.user.id).get()
+
+        # make context
         context = {
+            "total": user.cart_total,
             "CartItems": cart.item.all(),
         }
+
 
         # and render page
         return render(request,"cart.html", context)
@@ -292,10 +297,11 @@ def cart(request):
             cart.save()
             user.save()
 
-            # make context
             context = {
+                "total": user.cart_total,
                 "CartItems": cart.item.all(),
             }
+
 
             # and now render page
             return render(request,"cart.html", context)
@@ -321,7 +327,7 @@ def cart(request):
                 'username': username,
                 "CartItems": cart.item.all(),
             }
-            subject, from_email, to = "Your Pinocchio's Order", 'noreply@pinocchiospizza.net', email
+            subject, from_email, to = "Your Pinocchio's Order", "Pinocchio's Pizza & Subs", email
             html_content = html_template.render(d)
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -362,16 +368,26 @@ def cart(request):
             user = CustomUser.objects.filter(id = request.user.id).get()
 
             # calculate the amount of items
-            cart.item.filter()[item_to_delete - 1].delete()
+            delete = cart.item.filter()[item_to_delete - 1]
             user.cart_items -= 1
             request.user.cart_items = user.cart_items
 
+            # update cart total
+            newtotal = user.cart_total - delete.price
+            user.cart_total = newtotal
+
+            # actually delete item from cart
+            delete.delete()
+
             # save data
-            cart.save()
             user.save()
+            cart.save()
+
+            print(newtotal)
 
             # make context
             context = {
+                "total": newtotal,
                 "CartItems": cart.item.all(),
             }
 

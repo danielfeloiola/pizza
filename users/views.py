@@ -37,7 +37,7 @@ def register(request):
             # Email the user
             html_template = get_template('email.html')
             d = { 'username': username }
-            subject, from_email, to = "Welcome to Pinocchio's ", 'noreply@pinocchiospizza.net', email
+            subject, from_email, to = "Welcome to Pinocchio's ", "Pinocchio's Pizza & Subs", email
             html_content = html_template.render(d)
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
