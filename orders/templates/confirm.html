@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}: Confirmation {% endblock %}
+{% block body %}
+
+{% load staticfiles %}
+
+<!-- Check for items in the cart. It will show a different message if empty -->
+
+<!-- If the cart is empty, say so and suggest taking a look at the menu -->
+
+<section class="top-dish-area section-gap" id="dish">
+  <div class="container" style="text-align:center;">
+    <div class="row d-flex justify-content-center">
+      <div class="menu-content pb-30 col-lg-8">
+        <div class="title text-center">
+          <img src="https://cms-assets.tutsplus.com/uploads/users/523/posts/32694/final_image/tutorial-preview-large.png" style="height: 120px;"/>
+          <h1 class="mb-10">Thanks for choosing Pinocchio's Pizza!</h1>
+          <p>Your order is confirmed and will be ready for pickup soon</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

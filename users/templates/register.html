@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}: Register {% endblock %}
+{% block body %}
+
+<style>
+
+    /* stop the input tags from becoming to large */
+    input{
+        width: -moz-available;
+    }
+
+    /* separate form items a bit more */
+    label{
+        margin-top:15px;
+    }
+
+    /* hide help text from the form */
+    .helptext{
+      visibility: hidden;
+      display: none;
+  }
+
+  .banner-content{
+      margin: auto;
+  }
+  @media only screen and (max-width: 600px) {
+    .mx-auto{
+        width: 100% !important;
+    }
+}
+
+</style>
+
+
+<!-- start banner Area -->
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
+            <div class="banner-content col-lg-8 col-md-12">
+                <!-- FORM AREA -->
+                <div class='mx-auto w-50 p-0'>
+                    {% if message %}
+                        <div class='text-center'>
+                            {{message}}
+                        </div>
+                    {% endif %}
+                    <form class='m-5' action="{% url 'register' %}" method="POST" >
+                        {% csrf_token %}
+                        {{ form.as_table }}
+                        <br>
+                        <button type="submit" class="genric-btn primary circle">Register</button>
+                    </form>
+                    <div class='text-center m-2'>
+                        Already have an account? <a href="{% url 'login'%}">Log in</a>!
+                    </div>
+                </div>
+                <!-- END OF LOGIN FORM -->
+            </div>
+        </div>
+    </div>
+<!-- End banner Area -->
+
+
+
+
+{% endblock %}

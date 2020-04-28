@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+{% block title %}: Orders {% endblock %}
+{% block body %}
+
+{% load staticfiles %}
+
+<!-- Check for items in the cart. It will show a different message if empty -->
+{% if not CartItems %}
+<!-- If the cart is empty, say so and suggest taking a look at the menu -->
+
+<section class="top-dish-area section-gap" id="dish">
+  <div class="container" style="text-align:center;">
+    <div class="row d-flex justify-content-center">
+      <div class="menu-content pb-30 col-lg-8">
+        <div class="title text-center">
+          <h1 class="mb-10">No orders yet...</h1>
+          <p>Slow day hum? Well... Maybe check again in 5 minutes?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% else %}
+
+<section class="top-dish-area section-gap" id="dish" style="padding-bottom: 20px;">
+  <div class="container" style="text-align:center;">
+    <div class="row d-flex justify-content-center">
+      <div class="menu-content pb-30 col-lg-8">
+        <div class="title text-center">
+          <h1 class="mb-10">Here's all the orders for today:</h1>
+          <!-- <p>Here's everything you added to your cart</p>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- iterate tru cart items -->
+{% for order in orders %}
+<!-- The table containers -->
+<div class="section-top-border" style="margin-left:15%; margin-right:15%; padding:0px;">
+  <div class="progress-table-wrap" style="margin-bottom: 5%;">
+    <div class="progress-table" style="padding-bottom: 0;">
+
+      <!-- Header -->
+      <div class="table-head">
+        <div class="serial"></div>
+        <div class="visit">Placed By:</div>
+        <div class="visit" style="width: 40%;">{{order}}</div>
+        <div class="visit"></div>
+        <div class="serial"></div>
+        <div class="serial"> </div>
+      </div>
+
+      <!-- start table - second header (?) -->
+      <div class="table-head">
+        <div class="serial">#</div>
+        <div class="visit">Type</div>
+        <div class="visit" style="width: 40%;">Dish</div>
+        <div class="visit">Size</div>
+        <div class="serial">Price</div>
+        <div class="serial"> </div>
+      </div>
+
+      {% for item in order.item.all %}
+
+      <!-- Each table row -->
+      <div class="table-row">
+        <div class="serial">{{ forloop.counter }}</div>
+        <div class="visit">{{ item.type }}</div>
+        <div class="visit" style="width: 40%;">{{ item.dish }}
+
+          <!-- show toppings if pizza -->
+          {% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
+            <br>
+            {% if item.num_of_topings == 1 %}
+              w/ {{item.topping1}}
+            {% endif %}
+
+            {% if item.num_of_topings == 2 %}
+              w/ {{item.topping1}} & {{item.topping2}}
+            {% endif %}
+
+            {% if item.num_of_topings == 3 %}
+              w/ {{item.topping1}}, {{item.topping2}} & {{item.topping3}}
+            {% endif %}
+
+            {% if item.num_of_topings == 4 %}
+              w/ {{item.topping1}}, {{item.topping2}}, {{item.topping3}} & {{item.topping4}}
+            {% endif %}
+
+          {% endif %}
+
+          <!-- show extras if sub -->
+          {% if item.type == 'Sub' %}
+            <br>
+            {% if item.sub_extras_count == 1 %}
+              w/ {{ item.extra_1 }}
+            {% endif %}
+
+            {% if item.sub_extras_count == 2 %}
+              w/ {{ item.extra_1 }} & {{ item.extra_2 }}
+            {% endif %}
+
+            {% if item.sub_extras_count == 3 %}
+              w/ {{ item.extra_1 }}, {{ item.extra_2 }} & {{ item.extra_3 }}
+            {% endif %}
+
+            {% if item.sub_extras_count == 4 %}
+              w/ {{ item.extra_1 }}, {{ item.extra_2 }}, {{ item.extra_3 }} & {{ item.extra_4 }}
+            {% endif %}
+
+          {% endif %}
+
+        </div>
+
+        <!-- show a - if the item has no size (salads and pasta) -->
+        {% if item.size == "unique" %}
+          <div class="visit">-</div>
+        {% else %}
+          <div class="visit">{{ item.size }}</div>
+        {% endif %}
+        <!-- item price -->
+        <div class="serial">{{ item.price|floatformat:2 }}</div>
+        <div class="serial">
+        </div>
+      </div>
+
+      <!-- finish the loop for items -->
+      {% endfor %}
+
+      <!-- final row with total -->
+      <div class="table-row">
+        <div class="serial"></div>
+        <div class="visit"></div>
+        <div class="visit" style="width: 40%;"></div>
+        <div class="visit">Total</div>
+        <div class="serial">{{ order.order_total|floatformat:2 }}</div>
+        <div class="serial"></div>
+      </div>
+
+    <!-- close the table divs -->
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endif %}
+{% endblock %}
