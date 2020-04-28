@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 from dotenv import load_dotenv
-
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -151,3 +151,6 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 # Custom user que nao funcionou
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
