@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'fast-mountain-47414.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0:5000','fast-mountain-47414.herokuapp.com/']
 
 
 # Application definition
@@ -164,4 +164,12 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
+
+# Activate Django-Heroku
+#import django_heroku
+django_heroku.settings(locals()) # this line has to occur after STATIC_ROOT
+
+# Postgres w/Heroku
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
