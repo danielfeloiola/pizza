@@ -52,17 +52,20 @@
 			          <li class="menu"><a href="/">Home</a></li>
                       <li class="menu"><a href="{% url 'menu' %}">Menu</a></li>
 
+                      <!-- Wiil not show cart unless user is authenticated -->
+                      {% if user.is_authenticated %}
                       <!-- using two conditions, for user with and without a cart -->
-                      {% if user.cart_items is None %}
-                          <li class="menu-has-children"><a href="{% url 'cart' %}">Cart</a></li>
-                      {% elif user.cart_items == 0 %}
-                          <li class="menu-has-children"><a href="{% url 'cart' %}">Cart</a></li>
-                      {% elif user.cart_items != 0 %}
-                          <li class="menu-has-children"><a href="{% url 'cart' %}">Cart ( {{user.cart_items}} )</a></li>
-                      {% endif %}
+                          {% if user.cart_items is None %}
+                              <li class="menu-has-children"><a href="{% url 'cart' %}">Cart</a></li>
+                          {% elif user.cart_items == 0 %}
+                              <li class="menu-has-children"><a href="{% url 'cart' %}">Cart</a></li>
+                          {% elif user.cart_items != 0 %}
+                              <li class="menu-has-children"><a href="{% url 'cart' %}">Cart ( {{user.cart_items}} )</a></li>
+                          {% endif %}
 
-                      {% if user.is_superuser %}
-                          <li class="menu-has-children"><a href="{% url 'orders' %}">Orders</a></li>
+                          {% if user.is_superuser %}
+                              <li class="menu-has-children"><a href="{% url 'orders' %}">Orders</a></li>
+                          {% endif %}
                       {% endif %}
 
 

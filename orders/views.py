@@ -267,6 +267,11 @@ def cart(request):
     # show the cart
     if request.method == 'GET':
 
+        # get user object
+        user = CustomUser.objects.filter(id = request.user.id).get()
+
+        ## MAKE A PAGE FOR USERS THAT ARE NOT LOGGED
+
         # check for a cart and make one if there is none
         try:
             cart = Cart.objects.filter(user = request.user).get()
@@ -274,8 +279,7 @@ def cart(request):
             cart = Cart(user=request.user)
             cart.save()
 
-        # get user object
-        user = CustomUser.objects.filter(id = request.user.id).get()
+
 
         # make context
         context = {
