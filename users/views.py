@@ -59,7 +59,7 @@ def register(request):
 
             context = {
                 "form": form,
-                "message": messages.error(request, "Error")
+                "message": "Error: please check the form data"
             }
 
             #render page
