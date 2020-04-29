@@ -4,7 +4,7 @@
 # accounts/views.py
 
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 from . forms import CustomUserCreationForm
 
@@ -50,7 +50,7 @@ def register(request):
 
             #return redirect("login")
             #return render(request, 'login.html', {'form': form})
-            return HttpResponseRedirect('login')
+            return HttpResponseRedirect(reverse_lazy('login'))
 
     else:
         form = CustomUserCreationForm()
