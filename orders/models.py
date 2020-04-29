@@ -103,6 +103,9 @@ class Order(models.Model):
     item = models.ManyToManyField(CartItem, blank=True, name="item")
     order_total = models.FloatField(blank=True, null=True)
 
+    topping = models.ForeignKey(Topping, on_delete=models.CASCADE)
+
+
     def __str__(self):
         return f"{self.user}"
 
