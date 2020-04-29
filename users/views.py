@@ -50,7 +50,7 @@ def register(request):
 
             #return redirect("login")
             #return render(request, 'login.html', {'form': form})
-            return HttpResponseRedirect(reverse_lazy('login'))
+            return HttpResponseRedirect(reverse('login'))
 
     else:
         form = CustomUserCreationForm()
