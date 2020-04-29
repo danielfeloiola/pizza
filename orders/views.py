@@ -20,15 +20,17 @@ def index(request):
     """Render the home page"""
 
     # get the hours
-    hours = Hour.objects.all()
+    #hours = Hour.objects.all()
 
     # context
-    context = {
-        "hours": hours,
-    }
+    #context = {
+    #    "hours": hours,
+    #}
 
     #return HttpResponse("Project 3: TODO")
-    return render(request, "index.html", context)
+    #return render(request, "index.html", context)
+    return render(request, "index.html")
+
 
 def menu(request):
     """Show the menu cart and allows the user to add items to cart"""
