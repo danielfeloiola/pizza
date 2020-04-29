@@ -53,11 +53,13 @@ def register(request):
             return HttpResponseRedirect(reverse('login'))
         else:
             #return HttpResponse("Error: invalid form")
-            
+
             # make page with error message
+            form = CustomUserCreationForm()
+
             context = {
-                form = CustomUserCreationForm()
-                messages.error(request, "Error")
+                "form": form,
+                "message": messages.error(request, "Error")
             }
 
             #render page
