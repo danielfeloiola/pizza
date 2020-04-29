@@ -52,7 +52,10 @@ def register(request):
             #return render(request, 'login.html', {'form': form})
             return HttpResponseRedirect(reverse('login'))
         else:
-            return HttpResponse("Error: invalid form")
+            #return HttpResponse("Error: invalid form")
+            form = CustomUserCreationForm()
+            messages.error(request, "Error")
+            return render(request, 'register.html', {'form':form})
     else:
         form = CustomUserCreationForm()
         return render(request, 'register.html', {'form': form})
