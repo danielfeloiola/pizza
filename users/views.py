@@ -46,8 +46,9 @@ def register(request):
             # Add a success message to the next page
             messages.success(request, 'Your account has been created')
 
-            return redirect("login")
+            #return redirect("login")
             #return render(request, 'login.html', {'form': form})
+            return HttpResponseRedirect(reverse('login'))
 
     else:
         form = CustomUserCreationForm()
