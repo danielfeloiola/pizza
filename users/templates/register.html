@@ -16,7 +16,11 @@
     }
 
     /* hide help text from the form */
-    
+    .helptext{
+      visibility: hidden;
+      display: none;
+  }
+
   .banner-content{
       margin: auto;
   }
@@ -31,10 +35,10 @@
 
 <!-- start banner Area -->
     <div class="container">
-        <div class="row fullscreen d-flex align-items-center justify-content-start">
+        <div class="row fullscreen d-flex align-items-center justify-content-start" style="height: 870px;">
             <div class="banner-content col-lg-8 col-md-12">
                 <!-- FORM AREA -->
-                <div class='mx-auto w-50 p-0'>
+                <div class='mx-auto w-50 p-0' style="height:">
                     {% if message %}
                         <div class='text-center'>
                             {{message}}
