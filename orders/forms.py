@@ -30,17 +30,17 @@ class PizzaForm(forms.Form):
     pizza_price = forms.CharField()
     num_of_topings = forms.CharField()
 
-    #toppings = Topping.objects.all().values()
+    toppings = Topping.objects.all().values()
 
-    #final_toppings = []
+    final_toppings = []
 
-    #for i in toppings:
-    #    final_toppings.append((i['name'],i['name']))
+    for i in toppings:
+        final_toppings.append((i['name'],i['name']))
 
-    #pizza_topping_1 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
-    #pizza_topping_2 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
-    #pizza_topping_3 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
-    #pizza_topping_4 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
+    pizza_topping_1 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
+    pizza_topping_2 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
+    pizza_topping_3 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
+    pizza_topping_4 = forms.ChoiceField(widget=forms.Select, choices=final_toppings, required=False)
 
     label = {
         'pizza_topping_1': None,
