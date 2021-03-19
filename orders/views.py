@@ -11,6 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.template.loader import get_template
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
+import os
 
 
 # Create your views here.
@@ -337,7 +338,7 @@ def cart(request):
                 'username': username,
                 "CartItems": cart.item.all(),
             }
-            subject, from_email, to = "Your Pinocchio's Order", "Pinocchio's Pizza & Subs", email
+            subject, from_email, to = "Your Pinocchio's Order", os.getenv("DEFAULT_FROM_EMAIL"), email
             html_content = html_template.render(d)
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
