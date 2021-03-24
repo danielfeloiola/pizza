@@ -236,7 +236,7 @@ def menu(request):
             "order_form": order_form,
             "pizza_form": pizza_form,
             "sub_form": sub_form,
-            "messages": 'Item added to <a href="/cart">cart</a>' # add message
+            "messages": "Item added to cart" # add message
         }
         return render(request, "menu.html", context)
 
