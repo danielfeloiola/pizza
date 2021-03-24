@@ -77,19 +77,19 @@
           {% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
             <br>
             {% if item.num_of_topings == 1 %}
-              w/ {{item.topping1}}
+              with {{item.topping1}}
             {% endif %}
 
             {% if item.num_of_topings == 2 %}
-              w/ {{item.topping1}} & {{item.topping2}}
+              with {{item.topping1}} & {{item.topping2}}
             {% endif %}
 
             {% if item.num_of_topings == 3 %}
-              w/ {{item.topping1}}, {{item.topping2}} & {{item.topping3}}
+              with {{item.topping1}}, {{item.topping2}} & {{item.topping3}}
             {% endif %}
 
             {% if item.num_of_topings == 4 %}
-              w/ {{item.topping1}}, {{item.topping2}}, {{item.topping3}} & {{item.topping4}}
+              with {{item.topping1}}, {{item.topping2}}, {{item.topping3}} & {{item.topping4}}
             {% endif %}
 
           {% endif %}
@@ -98,19 +98,19 @@
           {% if item.type == 'Sub' %}
             <br>
             {% if item.sub_extras_count == 1 %}
-              w/ {{ item.extra_1|capfirst }}
+              with {{ item.extra_1|capfirst }}
             {% endif %}
 
             {% if item.sub_extras_count == 2 %}
-              w/ {{ item.extra_1|capfirst }} & {{ item.extra_2|capfirst }}
+              with {{ item.extra_1|capfirst }} & {{ item.extra_2|capfirst }}
             {% endif %}
 
             {% if item.sub_extras_count == 3 %}
-              w/ {{ item.extra_1|capfirst }}, {{ item.extra_2|capfirst }} & {{ item.extra_3|capfirst }}
+              with {{ item.extra_1|capfirst }}, {{ item.extra_2|capfirst }} & {{ item.extra_3|capfirst }}
             {% endif %}
 
             {% if item.sub_extras_count == 4 %}
-              w/ {{ item.extra_1|capfirst }}, {{ item.extra_2|capfirst }}, {{ item.extra_3|capfirst }} & {{ item.extra_4|capfirst }}
+              with {{ item.extra_1|capfirst }}, {{ item.extra_2|capfirst }}, {{ item.extra_3|capfirst }} & {{ item.extra_4|capfirst }}
             {% endif %}
 
           {% endif %}
