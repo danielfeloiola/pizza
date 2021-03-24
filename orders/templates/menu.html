@@ -10,7 +10,7 @@
   #message{
     color: white;
   }
-  a:visited {
+  a:visited, a:visited  {
     color: inherit;
   }
 </style>
@@ -23,7 +23,7 @@
         <div class='alert'>
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <!--{{ messages }}-->
-            Item added to <u><a id="message" href="/cart" >cart</a></u>
+            Item added to <a id="message" href="/cart" ><u>cart</u></a>
         </div>
     </div>
 {% endif %}
