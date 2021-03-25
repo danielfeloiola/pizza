@@ -104,7 +104,7 @@ class Order(models.Model):
     order_total = models.FloatField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.user}"
+        return f"{self.id} - {self.user}"
 
 class Hour(models.Model):
     sun = models.CharField(max_length=64, blank=True, null=True)
