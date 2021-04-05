@@ -4,15 +4,20 @@
 		<meta charset="utf-8">
 		<title></title>
 
+
 	</head>
 	<body style="background: #f5f8fa;font-family: 'Roboto', sans-serif;">
 		<div style="width: 90%;max-width:770px;margin: 20px auto;background: #ffffff;">
 			<section style="margin: 0 15px;color:#425b76;">
+
 				<div class="container" style="position: relative;text-align: center;color: white;">
 					<img src="https://fast-mountain-47414.herokuapp.com/static/img/order.png" alt="">
 
 				</div>
 
+
+
+				<div>
 
 	        <p>Hi {{username}}, </p>
 	        <p>Your order was successfully placed. Here's the details:</p>
@@ -89,10 +94,11 @@
 	        <!-- finish the loop for cart items -->
 	        {% endfor %}
 
-	      <!-- final thank you note for the email -->
-	      <p>Thank's for choosing Pinocchio's. Enjoy!</p>
+		      <!-- final thank you note for the email -->
+	      	<p>Thank's for choosing Pinocchio's. Enjoy!</p>
+			  </div>
 
-			</section>
-		</div>
-	</body>
+		  </section>
+	  </div>
+  </body>
 </html>
