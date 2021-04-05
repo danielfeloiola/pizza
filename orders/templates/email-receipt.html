@@ -8,87 +8,89 @@
 	<body style="background: #f5f8fa;font-family: 'Roboto', sans-serif;">
 		<div style="width: 90%;max-width:600px;margin: 20px auto;background: #ffffff;">
 			<section style="margin: 0 15px;color:#425b76;">
-				<!-- <h2 style="margin: 40px 0 27px 0;text-align: center;">-->
-                <h2>Thanks for your order!</h2>
-				<!--<hr style="border:0;border-top: 1px solid rgba(66,91,118,0.3);max-width: 50%">-->
-				<!--<p style="font-size:15.5px;font-weight: bold;margin:40px 20px 15px 20px;">-->
-                <p>Hi {{username}}, </p>
-                <p>Your order was successfully placed. Here's the details:</p>
+				<div class="container" style="position: relative;text-align: center;color: white;">
+					<img src="https://fast-mountain-47414.herokuapp.com/static/img/order.png" alt="">
+
+				</div>
+				
+
+	        <p>Hi {{username}}, </p>
+	        <p>Your order was successfully placed. Here's the details:</p>
 
 
-                {% for item in CartItems %}
+	        {% for item in CartItems %}
 
-                <!-- Each table row -->
-                <div class="table-row">
+	        <!-- Each table row -->
+	        <div class="table-row">
 
-                  <!-- counter -->
-                  <div class="serial">{{ forloop.counter }}</div>
+	          <!-- counter -->
+	          <div class="serial">{{ forloop.counter }}</div>
 
-                  <!-- type ie pizza or sub -->
-                  <div class="visit">{{ item.type }}</div>
+	          <!-- type ie pizza or sub -->
+	          <div class="visit">{{ item.type }}</div>
 
-                  <!-- dish -->
-                  <div class="visit" style="width: 40%;">{{ item.dish }}
+	          <!-- dish -->
+	          <div class="visit" style="width: 40%;">{{ item.dish }}
 
-                  <!-- show toppings if pizza -->
-                  {% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
-                    <br>
-                    {% if item.num_of_topings == 1 %}
-                      w/ {{item.topping1}}
-                    {% endif %}
-                    {% if item.num_of_topings == 2 %}
-                      w/ {{item.topping1}} & {{item.topping2}}
-                    {% endif %}
-                    {% if item.num_of_topings == 3 %}
-                      w/ {{item.topping1}}, {{item.topping2}} & {{item.topping3}}
-                    {% endif %}
-                    {% if item.num_of_topings == 4 %}
-                      w/ {{item.topping1}}, {{item.topping2}}, {{item.topping3}} & {{item.topping4}}
-                    {% endif %}
-                  {% endif %}
+	          <!-- show toppings if pizza -->
+	          {% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
+	            <br>
+	            {% if item.num_of_topings == 1 %}
+	              w/ {{item.topping1}}
+	            {% endif %}
+	            {% if item.num_of_topings == 2 %}
+	              w/ {{item.topping1}} & {{item.topping2}}
+	            {% endif %}
+	            {% if item.num_of_topings == 3 %}
+	              w/ {{item.topping1}}, {{item.topping2}} & {{item.topping3}}
+	            {% endif %}
+	            {% if item.num_of_topings == 4 %}
+	              w/ {{item.topping1}}, {{item.topping2}}, {{item.topping3}} & {{item.topping4}}
+	            {% endif %}
+	          {% endif %}
 
-                  <!-- show extras if sub -->
-                  {% if item.type == 'Sub' %}
-                    <br>
-                    {% if item.sub_extras_count == 1 %}
-                      w/ {{ item.extra_1 }}
-                    {% endif %}
+	          <!-- show extras if sub -->
+	          {% if item.type == 'Sub' %}
+	            <br>
+	            {% if item.sub_extras_count == 1 %}
+	              w/ {{ item.extra_1 }}
+	            {% endif %}
 
-                    {% if item.sub_extras_count == 2 %}
-                        w/ {{ item.extra_1 }} & {{ item.extra_2 }}
-                    {% endif %}
+	            {% if item.sub_extras_count == 2 %}
+	                w/ {{ item.extra_1 }} & {{ item.extra_2 }}
+	            {% endif %}
 
-                    {% if item.sub_extras_count == 3 %}
-                        w/ {{ item.extra_1 }}, {{ item.extra_2 }} & {{ item.extra_3 }}
-                    {% endif %}
+	            {% if item.sub_extras_count == 3 %}
+	                w/ {{ item.extra_1 }}, {{ item.extra_2 }} & {{ item.extra_3 }}
+	            {% endif %}
 
-                    {% if item.sub_extras_count == 4 %}
-                        w/ {{ item.extra_1 }}, {{ item.extra_2 }}, {{ item.extra_3 }} & {{ item.extra_4 }}
-                    {% endif %}
+	            {% if item.sub_extras_count == 4 %}
+	                w/ {{ item.extra_1 }}, {{ item.extra_2 }}, {{ item.extra_3 }} & {{ item.extra_4 }}
+	            {% endif %}
 
-                  {% endif %}
+	          {% endif %}
 
-                  </div>
+	          </div>
 
 
-                  <!-- show a - if the item has no size (salads and pasta) -->
-                  {% if item.size == "unique" %}
-                    <div class="visit">-</div>
-                  {% else %}
-                    <div class="visit">{{ item.size }}</div>
-                  {% endif %}
+	          <!-- show a - if the item has no size (salads and pasta) -->
+	          {% if item.size == "unique" %}
+	            <div class="visit">-</div>
+	          {% else %}
+	            <div class="visit">{{ item.size }}</div>
+	          {% endif %}
 
-                  <!-- price -->
-                  <div class="serial">{{ item.price|floatformat:2 }}</div>
+	          <!-- price -->
+	          <div class="serial">{{ item.price|floatformat:2 }}</div>
 
-                  <!-- an extra line for aesthetics-->
-                  <br>
+	          <!-- an extra line for aesthetics-->
+	          <br>
 
-                <!-- finish the loop for cart items -->
-                {% endfor %}
+	        <!-- finish the loop for cart items -->
+	        {% endfor %}
 
-              <!-- final thank you note for the email -->
-              <p>Thank's for choosing Pinocchio's. Enjoy!</p>
+	      <!-- final thank you note for the email -->
+	      <p>Thank's for choosing Pinocchio's. Enjoy!</p>
 
 			</section>
 		</div>
