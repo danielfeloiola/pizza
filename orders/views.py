@@ -343,6 +343,7 @@ def cart(request):
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
 
+
             # add all cart items to the order and remove from cart
             for element in cart.item.all():
                 order.item.add(element)
@@ -358,7 +359,9 @@ def cart(request):
             request.user.cart_items = None
 
             # send the EMAIL
+            print('DEBUG #8')
             msg.send()
+            print('DEBUG #9')
 
             # save data
             cart.save()
