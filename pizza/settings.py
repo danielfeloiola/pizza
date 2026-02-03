@@ -84,16 +84,11 @@ WSGI_APPLICATION = 'pizza.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DATABASE_NAME"),
+        'NAME': 'koyebdb',
         "USER": os.getenv("PGUSER"),
         "PASSWORD": os.getenv("PGPASSWORD"),
-        "HOST": os.getenv("PGHOST"),
-        "PORT": os.getenv("PGPORT", "5432"),
-        "OPTIONS": {
-            "sslmode": "require",
-            "options": "-c endpoint=ep-round-art-aixulurm",
-
-        },
+        "HOST": 'ep-round-art-aixulurm.c-4.us-east-1.pg.koyeb.app',
+        "OPTIONS": {"sslmode": "require"},
     }
 }
 
