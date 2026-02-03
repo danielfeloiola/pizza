@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
+import dj_database_url
 from dotenv import load_dotenv
 import os
 import psycopg2
@@ -81,19 +82,26 @@ WSGI_APPLICATION = 'pizza.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': os.getenv('DATABASE_NAME'),
+#        'USER': os.getenv('PGUSER'),
+#        'PASSWORD': os.getenv('PGPASSWORD'),
+#        'HOST': os.getenv('PGHOST'),
+#        'PORT': os.getenv('PGPORT', '5432'),
+#        'OPTIONS': {
+#            'sslmode': 'require',
+#            'options': '-c endpoint=ep-round-art-aixulurm',
+#        },
+#    }
+#}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('PGUSER'),
-        'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT', '5432'),
-        'OPTIONS': {
-            'sslmode': 'require',
-            'options': '-c endpoint=ep-round-art-aixulurm',
-        },
-    }
+    "default": dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=0,
+    )
 }
 
 
