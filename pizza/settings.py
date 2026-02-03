@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-import dj_database_url
+
 import os
 import psycopg2
 
@@ -88,7 +88,10 @@ DATABASES = {
         "USER": os.getenv("PGUSER"),
         "PASSWORD": os.getenv("PGPASSWORD"),
         "HOST": 'ep-round-art-aixulurm.c-4.us-east-1.pg.koyeb.app',
-        "OPTIONS": {"sslmode": "require"},
+        "OPTIONS": {
+            "sslmode": "require",
+            'options': '-c endpoint=ep-round-art-aixulurm'        
+        },
     }
 }
 
