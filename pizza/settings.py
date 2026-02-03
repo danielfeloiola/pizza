@@ -91,7 +91,7 @@ DATABASES = {
         'PORT': os.getenv('PGPORT', '5432'),
         'OPTIONS': {
             'sslmode': 'require',
-            'options': '-c endpoint=ep-nameless-hat-aizjzql5',
+            'options': '-c endpoint=ep-round-art-aixulurm',
         },
     }
 }
