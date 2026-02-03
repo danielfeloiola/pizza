@@ -82,15 +82,15 @@ WSGI_APPLICATION = 'pizza.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        'NAME': 'koyebdb',
-        "USER": os.getenv("PGUSER"),
-        "PASSWORD": os.getenv("PGPASSWORD"),
-        "HOST": 'ep-round-art-aixulurm.c-4.us-east-1.pg.koyeb.app',
-        "OPTIONS": {
-            "sslmode": "require",
-            'options': '-c endpoint=ep-round-art-aixulurm'        
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('PGUSER'),
+        'PASSWORD': os.getenv('PGPASSWORD'),
+        'HOST': os.getenv('PGHOST'),
+        'PORT': os.getenv('PGPORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
         },
     }
 }
@@ -163,6 +163,8 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 # Custom user que nao funcionou
 AUTH_USER_MODEL = 'users.CustomUser'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Activate Django-Heroku.
 #django_heroku.settings(locals())
