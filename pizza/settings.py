@@ -97,7 +97,17 @@ WSGI_APPLICATION = 'pizza.wsgi.application'
 #}
 
 DATABASES = {
-    "default": dj_database_url.config()
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("PGUSER"),
+        "PASSWORD": os.getenv("PGPASSWORD"),
+        "HOST": os.getenv("PGHOST"),
+        "PORT": os.getenv("PGPORT", "5432"),
+        "OPTIONS": {
+            "sslmode": "require",
+        },
+    }
 }
 
 
