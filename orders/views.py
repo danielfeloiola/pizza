@@ -28,9 +28,7 @@ def index(request):
         "hours": hours,
     }
 
-    #return HttpResponse("Project 3: TODO")
     return render(request, "index.html", context)
-    #return render(request, "index.html")
 
 
 def menu(request):
@@ -122,19 +120,19 @@ def menu(request):
 
             # add extras...
             if extra_cheese == True:
-                sub_price += 50
+                sub_price += 100
                 extras_count += 1
                 extras.append("cheese")
             if extra_green_pepper == True:
-                sub_price += 50
+                sub_price += 100
                 extras_count += 1
                 extras.append("green peppers")
             if extra_mushroom == True:
-                sub_price += 50
+                sub_price += 100
                 extras_count += 1
                 extras.append("mushrooms")
             if extra_onion == True:
-                sub_price += 50
+                sub_price += 100
                 extras_count += 1
                 extras.append("onions")
 
