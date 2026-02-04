@@ -138,7 +138,6 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # isso foi adicionado depois
@@ -162,13 +161,3 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Activate Django-Heroku.
-#django_heroku.settings(locals())
-
-# Activate Django-Heroku
-#import django_heroku
-#django_heroku.settings(locals()) # this line has to occur after STATIC_ROOT
-
-# Postgres w/Heroku
-#import dj_database_url
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
