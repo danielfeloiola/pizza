@@ -419,7 +419,8 @@ def orders(request):
     # get the orders
     orders = Order.objects.all()
 
-    # DO AN ERROR CHECK HERE IN CASE THERE IS NO ORDERS!
+    # Variable to avoid breaking if there are no orders
+    items = []
 
     # get items for each order
     for order in orders:
