@@ -355,9 +355,7 @@ def cart(request):
             request.user.cart_items = None
 
             # send the EMAIL
-            print('DEBUG #8')
             msg.send()
-            print('DEBUG #9')
 
             # save data
             cart.save()

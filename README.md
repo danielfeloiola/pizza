@@ -65,5 +65,7 @@ Personal touch:
 
 
 Features:
-Sending emails for reseting passwords and confirming purchases.
+Sending emails for reseting passwords and confirming purchases, using the Brevo API
 Access to an admin page to add and remove menu items.
+
+TODO: Improve this description!
