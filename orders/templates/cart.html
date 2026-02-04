@@ -5,17 +5,30 @@
 
 {% load static %}
 
+<style>
+  .cart-container { margin: 0 15%; padding: 0; }
+  .cart-section { padding-bottom: 20px; }
+  .cart-table-wrap { margin-bottom: 15%; }
+  .cart-table { padding-bottom: 0; }
+  .cart-empty-msg { margin-top: 20%; margin-bottom: 20%; }
+  .col-dish { width: 40%; }
+  .link-menu { text-decoration: underline; color: inherit; }
+  .btn-icon { background: none !important; border: none; padding: 0 !important; }
+  .btn-clear { margin-left: 0; margin-right: 8px; }
+  .btn-order { margin-left: 0; margin-right: -10px; padding: 0; width: 15%; }
+</style>
+
 <!-- Check for items in the cart. It will show a different message if empty -->
 {% if not CartItems %}
 <!-- If the cart is empty, say so and suggest taking a look at the menu -->
 
 <section class="top-dish-area section-gap" id="dish">
-  <div class="container" style="text-align:center;">
-    <div class="row d-flex justify-content-center" style="margin-top: 20%;margin-bottom: 20%;">
+  <div class="container text-center">
+    <div class="row d-flex justify-content-center cart-empty-msg">
       <div class="menu-content pb-30 col-lg-8">
         <div class="title text-center">
           <h1 class="mb-10">You have no items in your cart</h1>
-          <p>Why don't you take a look at all the delicious things in our <a style="text-decoration: underline; color: inherit;" href="{% url 'menu'%}">menu</a></p>
+          <p>Why don't you take a look at all the delicious things in our <a class="link-menu" href="{% url 'menu'%}">menu</a></p>
         </div>
       </div>
     </div>
@@ -24,8 +37,8 @@
 
 {% else %}
 
-<section class="top-dish-area section-gap" id="dish" style="padding-bottom: 20px;">
-  <div class="container" style="text-align:center;">
+<section class="top-dish-area section-gap cart-section" id="dish">
+  <div class="container text-center">
     <div class="row d-flex justify-content-center">
       <div class="menu-content pb-30 col-lg-8">
         <div class="title text-center">
@@ -38,15 +51,15 @@
 </section>
 
 <!-- The table containers -->
-<div class="section-top-border" style="margin-left:15%; margin-right:15%; padding:0px;">
-  <div class="progress-table-wrap" style="margin-bottom: 15%;">
-    <div class="progress-table" style="padding-bottom: 0;">
+<div class="section-top-border cart-container">
+  <div class="progress-table-wrap cart-table-wrap">
+    <div class="progress-table cart-table">
 
       <!-- start table - header-->
       <div class="table-head">
         <div class="serial">#</div>
         <div class="visit">Type</div>
-        <div class="visit" style="width: 40%;">Dish</div>
+        <div class="visit col-dish">Dish</div>
         <div class="visit">Size</div>
         <div class="serial">Price</div>
         <div class="serial"> </div>
@@ -65,7 +78,7 @@
         <div class="visit">{{ item.type }}</div>
 
         <!-- dish -->
-        <div class="visit" style="width: 40%;">{{ item.dish }}
+        <div class="visit col-dish">{{ item.dish }}
 
         <!-- show toppings if pizza -->
         {% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
@@ -119,7 +132,7 @@
 
         <!-- delete button -->
         <div class="serial" >
-          <button name="order"  data-toggle="modal" data-target="#deleteModal{{ forloop.counter }}" value="{{ forloop.counter }}" class="fa fa-trash icon" style="background: none!important;border: none;padding: 0!important;"></button>
+          <button name="order" data-toggle="modal" data-target="#deleteModal{{ forloop.counter }}" value="{{ forloop.counter }}" class="fa fa-trash icon btn-icon"></button>
         </div>
       </div>
       <!-- End of the row -->
@@ -157,7 +170,7 @@
       <div class="table-row">
         <div class="serial"></div>
         <div class="visit"></div>
-        <div class="visit" style="width: 40%;"></div>
+        <div class="visit col-dish"></div>
         <div class="visit">Total</div>
         <div class="serial">{{ total|floatformat:2 }}</div>
         <div class="serial"> </div>
@@ -167,9 +180,9 @@
       <div class="table-row">
         <div class="serial"></div>
         <div class="visit"></div>
-        <div class="visit" style="width: 40%;"></div>
-        <input value="Clear Cart" data-toggle="modal" data-target="#deleteAllModal" class="genric-btn default circle" style="background: none!important;border: none;padding: 0!important; margin-left:0px;margin-right:8px;">
-        <input data-toggle="modal" data-target="#orderModal" value="Place Order" class="genric-btn primary circle" style="margin-left: 0px; margin-right: -10px; padding:0; width: 15%;">
+        <div class="visit col-dish"></div>
+        <input value="Clear Cart" data-toggle="modal" data-target="#deleteAllModal" class="genric-btn default circle btn-icon btn-clear">
+        <input data-toggle="modal" data-target="#orderModal" value="Place Order" class="genric-btn primary circle btn-order">
         <div class="serial"> </div>
       </div>
 
