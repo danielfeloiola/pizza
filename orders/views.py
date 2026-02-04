@@ -14,8 +14,6 @@ from django.core.mail import EmailMultiAlternatives
 import os
 
 
-# Create your views here.
-
 
 def index(request):
     """Render the home page"""
