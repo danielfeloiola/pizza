@@ -28,6 +28,65 @@
         margin-top: 15px;
     }
 
+    /* Password requirements tooltip */
+    .auth-form p {
+        position: relative;
+    }
+    .auth-form .helptext {
+        display: none;
+        position: absolute;
+        left: 105%;
+        top: 0;
+        background-color: #333;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 12px;
+        width: 250px;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .auth-form .helptext::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 15px;
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent #333 transparent transparent;
+    }
+    .auth-form .helptext ul {
+        margin: 0;
+        padding-left: 15px;
+    }
+    .auth-form .helptext li {
+        margin-bottom: 5px;
+    }
+    .auth-form p:hover .helptext,
+    .auth-form p:focus-within .helptext {
+        display: block;
+    }
+
+    /* Tooltip indicator icon */
+    .auth-form label[for="id_password1"]::after,
+    .auth-form label[for="id_password2"]::after {
+        content: " ⓘ";
+        font-size: 14px;
+        color: #777;
+        cursor: help;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .auth-form .helptext {
+            left: 0;
+            top: 100%;
+            width: 100%;
+        }
+        .auth-form .helptext::before {
+            display: none;
+        }
+    }
+
     @media only screen and (max-width: 600px) {
         .mx-auto {
             width: 100% !important;
