@@ -28,11 +28,11 @@
         margin-top: 15px;
     }
 
-    /* Password requirements tooltip */
-    .auth-form p {
+    /* Password tooltip */
+    .password-field {
         position: relative;
     }
-    .auth-form .helptext {
+    .password-field .pwd-tooltip {
         display: none;
         position: absolute;
         left: 105%;
@@ -46,7 +46,7 @@
         z-index: 100;
         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
-    .auth-form .helptext::before {
+    .password-field .pwd-tooltip::before {
         content: "";
         position: absolute;
         left: -8px;
@@ -55,34 +55,32 @@
         border-style: solid;
         border-color: transparent #333 transparent transparent;
     }
-    .auth-form .helptext ul {
+    .password-field .pwd-tooltip ul {
         margin: 0;
         padding-left: 15px;
+        list-style: disc;
     }
-    .auth-form .helptext li {
+    .password-field .pwd-tooltip li {
         margin-bottom: 5px;
     }
-    .auth-form p:hover .helptext,
-    .auth-form p:focus-within .helptext {
+    .password-field:hover .pwd-tooltip,
+    .password-field:focus-within .pwd-tooltip {
         display: block;
     }
-
-    /* Tooltip indicator icon */
-    .auth-form label[for="id_password1"]::after,
-    .auth-form label[for="id_password2"]::after {
-        content: " ⓘ";
+    .pwd-info {
         font-size: 14px;
         color: #777;
         cursor: help;
     }
 
     @media only screen and (max-width: 992px) {
-        .auth-form .helptext {
+        .password-field .pwd-tooltip {
+            position: relative;
             left: 0;
-            top: 100%;
+            top: 5px;
             width: 100%;
         }
-        .auth-form .helptext::before {
+        .password-field .pwd-tooltip::before {
             display: none;
         }
     }
@@ -111,7 +109,43 @@
                     {% endif %}
                     <form class='auth-form m-5' action="{% url 'register' %}" method="POST">
                         {% csrf_token %}
-                        {{ form.as_p }}
+
+                        {% for field in form %}
+                            {% if field.name == 'password1' %}
+                            <div class="password-field">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}: <span class="pwd-info">&#9432;</span></label>
+                                {{ field }}
+                                <div class="pwd-tooltip">
+                                    <ul>
+                                        <li>Must contain at least 8 characters</li>
+                                        <li>Can't be too similar to your personal info</li>
+                                        <li>Can't be a commonly used password</li>
+                                        <li>Can't be entirely numeric</li>
+                                    </ul>
+                                </div>
+                                {% if field.errors %}
+                                    <div class="generic-blockquote">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                            {% elif field.name == 'password2' %}
+                            <p>
+                                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="generic-blockquote">{{ field.errors }}</div>
+                                {% endif %}
+                            </p>
+                            {% else %}
+                            <p>
+                                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="generic-blockquote">{{ field.errors }}</div>
+                                {% endif %}
+                            </p>
+                            {% endif %}
+                        {% endfor %}
+
                         <br>
                         <button type="submit" class="genric-btn primary circle">Register</button>
                     </form>
