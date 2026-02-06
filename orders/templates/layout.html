@@ -75,7 +75,7 @@
                       {% if user.is_authenticated %}
                       <li class="menu-has-children"><a href="">Account</a>
                           <ul>
-                              <li><a href="">Change Password</a></li>
+                              <li><a href="{% url 'password_change' %}">Change Password</a></li>
                               <li><a href="{% url 'logout' %}">Log Out</a></li>
                           </ul>
                       </li>
