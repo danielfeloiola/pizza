@@ -2,103 +2,111 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Your Order</title>
 	</head>
-	<body style="background: #f5f8fa;font-family: 'Roboto', sans-serif;">
-		<div style="width: 90%;max-width:770px;margin: 20px auto;background: #ffffff;">
-			<section style="margin: 0 15px;color:#425b76;">
+	<body style="margin: 0; padding: 0; background: #f5f8fa; font-family: Arial, Helvetica, sans-serif;">
+		<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background: #f5f8fa;">
+			<tr>
+				<td align="center" style="padding: 20px 0;">
+					<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; width: 100%; background: #ffffff; border-radius: 8px; overflow: hidden;">
 
-				<div class="container" style="position: relative;text-align: center;color: white;">
-					<img src="https://fast-mountain-47414.herokuapp.com/static/img/order.png" alt="">
+						<!-- Header -->
+						<tr>
+							<td style="background: #c4463a; padding: 30px 40px; text-align: center;">
+								<h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: bold;">Pinocchio's Pizza & Subs</h1>
+								<p style="margin: 8px 0 0; color: #f5d6d3; font-size: 14px;">Order Confirmation</p>
+							</td>
+						</tr>
 
-				</div>
+						<!-- Greeting -->
+						<tr>
+							<td style="padding: 30px 40px 10px;">
+								<p style="margin: 0 0 10px; color: #425b76; font-size: 16px;">Hi {{ username }},</p>
+								<p style="margin: 0; color: #425b76; font-size: 16px;">Your order was successfully placed. Here are the details:</p>
+							</td>
+						</tr>
 
+						<!-- Order Items Table -->
+						<tr>
+							<td style="padding: 20px 40px;">
+								<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
+									<!-- Table Header -->
+									<tr style="background: #f0f3f6;">
+										<td style="padding: 10px 12px; color: #6b7c93; font-size: 12px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #e3e8ee;">#</td>
+										<td style="padding: 10px 12px; color: #6b7c93; font-size: 12px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #e3e8ee;">Type</td>
+										<td style="padding: 10px 12px; color: #6b7c93; font-size: 12px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #e3e8ee;">Dish</td>
+										<td style="padding: 10px 12px; color: #6b7c93; font-size: 12px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #e3e8ee;">Size</td>
+										<td style="padding: 10px 12px; color: #6b7c93; font-size: 12px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #e3e8ee; text-align: right;">Price</td>
+									</tr>
 
+									{% for item in CartItems %}
+									<!-- Item Row -->
+									<tr>
+										<td style="padding: 12px; color: #425b76; font-size: 14px; border-bottom: 1px solid #e3e8ee; vertical-align: top;">{{ forloop.counter }}</td>
+										<td style="padding: 12px; color: #425b76; font-size: 14px; border-bottom: 1px solid #e3e8ee; vertical-align: top;">{{ item.type }}</td>
+										<td style="padding: 12px; color: #425b76; font-size: 14px; border-bottom: 1px solid #e3e8ee; vertical-align: top;">
+											{{ item.dish }}
+											{% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
+												{% if item.num_of_topings == 1 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.topping1 }}</span>
+												{% endif %}
+												{% if item.num_of_topings == 2 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.topping1 }} &amp; {{ item.topping2 }}</span>
+												{% endif %}
+												{% if item.num_of_topings == 3 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.topping1 }}, {{ item.topping2 }} &amp; {{ item.topping3 }}</span>
+												{% endif %}
+												{% if item.num_of_topings == 4 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.topping1 }}, {{ item.topping2 }}, {{ item.topping3 }} &amp; {{ item.topping4 }}</span>
+												{% endif %}
+											{% endif %}
+											{% if item.type == 'Sub' %}
+												{% if item.sub_extras_count == 1 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.extra_1 }}</span>
+												{% endif %}
+												{% if item.sub_extras_count == 2 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.extra_1 }} &amp; {{ item.extra_2 }}</span>
+												{% endif %}
+												{% if item.sub_extras_count == 3 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.extra_1 }}, {{ item.extra_2 }} &amp; {{ item.extra_3 }}</span>
+												{% endif %}
+												{% if item.sub_extras_count == 4 %}
+													<br><span style="color: #8898aa; font-size: 12px;">w/ {{ item.extra_1 }}, {{ item.extra_2 }}, {{ item.extra_3 }} &amp; {{ item.extra_4 }}</span>
+												{% endif %}
+											{% endif %}
+										</td>
+										<td style="padding: 12px; color: #425b76; font-size: 14px; border-bottom: 1px solid #e3e8ee; vertical-align: top;">
+											{% if item.size == "unique" %}
+												-
+											{% else %}
+												{{ item.size }}
+											{% endif %}
+										</td>
+										<td style="padding: 12px; color: #425b76; font-size: 14px; border-bottom: 1px solid #e3e8ee; vertical-align: top; text-align: right;">${{ item.price|floatformat:2 }}</td>
+									</tr>
+									{% endfor %}
+								</table>
+							</td>
+						</tr>
 
-				<div style="margin:9%;">
+						<!-- Thank You -->
+						<tr>
+							<td style="padding: 10px 40px 30px;">
+								<p style="margin: 0; color: #425b76; font-size: 16px;">Thanks for choosing Pinocchio's. Enjoy!</p>
+							</td>
+						</tr>
 
-	        <p>Hi {{username}}, </p>
-	        <p>Your order was successfully placed. Here's the details:</p>
+						<!-- Footer -->
+						<tr>
+							<td style="background: #f0f3f6; padding: 20px 40px; text-align: center;">
+								<p style="margin: 0; color: #8898aa; font-size: 12px;">Pinocchio's Pizza &amp; Subs &bull; 74 Winthrop St, Cambridge, MA</p>
+							</td>
+						</tr>
 
-
-	        {% for item in CartItems %}
-
-	        <!-- Each table row -->
-	        <div class="table-row">
-
-	          <!-- counter -->
-	          <div class="serial">{{ forloop.counter }}</div>
-
-	          <!-- type ie pizza or sub -->
-	          <div class="visit">{{ item.type }}</div>
-
-	          <!-- dish -->
-	          <div class="visit" style="width: 40%;">{{ item.dish }}
-
-	          <!-- show toppings if pizza -->
-	          {% if item.type == 'Sicilian Pizzas' or item.type == 'Regular Pizzas' %}
-	            <br>
-	            {% if item.num_of_topings == 1 %}
-	              w/ {{item.topping1}}
-	            {% endif %}
-	            {% if item.num_of_topings == 2 %}
-	              w/ {{item.topping1}} & {{item.topping2}}
-	            {% endif %}
-	            {% if item.num_of_topings == 3 %}
-	              w/ {{item.topping1}}, {{item.topping2}} & {{item.topping3}}
-	            {% endif %}
-	            {% if item.num_of_topings == 4 %}
-	              w/ {{item.topping1}}, {{item.topping2}}, {{item.topping3}} & {{item.topping4}}
-	            {% endif %}
-	          {% endif %}
-
-	          <!-- show extras if sub -->
-	          {% if item.type == 'Sub' %}
-	            <br>
-	            {% if item.sub_extras_count == 1 %}
-	              w/ {{ item.extra_1 }}
-	            {% endif %}
-
-	            {% if item.sub_extras_count == 2 %}
-	                w/ {{ item.extra_1 }} & {{ item.extra_2 }}
-	            {% endif %}
-
-	            {% if item.sub_extras_count == 3 %}
-	                w/ {{ item.extra_1 }}, {{ item.extra_2 }} & {{ item.extra_3 }}
-	            {% endif %}
-
-	            {% if item.sub_extras_count == 4 %}
-	                w/ {{ item.extra_1 }}, {{ item.extra_2 }}, {{ item.extra_3 }} & {{ item.extra_4 }}
-	            {% endif %}
-
-	          {% endif %}
-
-	          </div>
-
-
-	          <!-- show a - if the item has no size (salads and pasta) -->
-	          {% if item.size == "unique" %}
-	            <div class="visit">-</div>
-	          {% else %}
-	            <div class="visit">{{ item.size }}</div>
-	          {% endif %}
-
-	          <!-- price -->
-	          <div class="serial">{{ item.price|floatformat:2 }}</div>
-
-	          <!-- an extra line for aesthetics-->
-	          <br>
-
-	        <!-- finish the loop for cart items -->
-	        {% endfor %}
-
-		      <!-- final thank you note for the email -->
-	      	<p>Thank's for choosing Pinocchio's. Enjoy!</p>
-			  </div>
-
-		  </section>
-	  </div>
-  </body>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
 </html>

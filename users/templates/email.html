@@ -2,35 +2,44 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Welcome</title>
 	</head>
-	<body style="background: #f5f8fa;font-family: 'Roboto', sans-serif;">
-		<div style="width: 90%;max-width:600px;margin: 20px auto;background: #ffffff;">
-			<section style="color:#425b76;">
+	<body style="margin: 0; padding: 0; background: #f5f8fa; font-family: Arial, Helvetica, sans-serif;">
+		<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background: #f5f8fa;">
+			<tr>
+				<td align="center" style="padding: 20px 0;">
+					<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; width: 100%; background: #ffffff; border-radius: 8px; overflow: hidden;">
 
-				<div class="container" style="position: relative;text-align: center;color: white;">
-					<img src="https://fast-mountain-47414.herokuapp.com/static/img/wood.png" alt="">
+						<!-- Header -->
+						<tr>
+							<td style="background: #c4463a; padding: 30px 40px; text-align: center;">
+								<h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: bold;">Pinocchio's Pizza & Subs</h1>
+								<p style="margin: 8px 0 0; color: #f5d6d3; font-size: 14px;">Welcome!</p>
+							</td>
+						</tr>
 
-				</div>
+						<!-- Content -->
+						<tr>
+							<td style="padding: 30px 40px; color: #425b76; font-size: 16px; line-height: 1.6;">
+								<p style="margin: 0 0 15px;">Hi {{ username }},</p>
+								<p style="margin: 0 0 15px;">Your account has been created and is ready to use!</p>
+								<p style="margin: 0 0 25px;">Now that everything is set up, why don't you take a look at the delicious things in our menu?</p>
+								<p style="margin: 0 0 25px;">Bon appetit!</p>
+								<p style="margin: 0; color: #8898aa; font-style: italic;">Your friends at Pinocchio's</p>
+							</td>
+						</tr>
 
-				<div>
-					<p>Hi {{username}}, </p>
-					<p>Your account has been created and is ready to use!</p>
-					<p>Now that everything is set up, why don't you take a look</p>
-					<p>at the delicious things in our <a href="https://fast-mountain-47414.herokuapp.com/menu/">menu</a>?</p>
-					<br>
-					<p>Bon apetit!</p>
-					<p>Your friends at Pinocchio's</p>
-				</div
+						<!-- Footer -->
+						<tr>
+							<td style="background: #f0f3f6; padding: 20px 40px; text-align: center;">
+								<p style="margin: 0; color: #8898aa; font-size: 12px;">Pinocchio's Pizza &amp; Subs &bull; 74 Winthrop St, Cambridge, MA</p>
+							</td>
+						</tr>
 
-
-
-
-				<!-- <hr style="border:0;border-top: 1px solid rgba(66,91,118,0.3);max-width: 50%">-->
-				<!--<p style="font-size:15.5px;font-weight: bold;margin:40px 20px 15px 20px;">-->
-
-			</section>
-		</div>
+					</table>
+				</td>
+			</tr>
+		</table>
 	</body>
 </html>
