@@ -4,6 +4,13 @@
 {% block title %}{% endblock %}
 {% block body %}
 
+<style>
+  .hours-list { line-height: 1.82em !important; }
+  .hours-msg { margin: 3%; }
+  .map-section { margin-bottom: 5%; padding: 5%; }
+  .map-container { width: 100%; height: 545px; }
+</style>
+
 <!-- start banner Area -->
 <section class="banner-area relative" id="home">
     <div class="container">
@@ -121,7 +128,7 @@
 
             <div class="col-md-2 mt-sm-30">
 				<div>
-					<ol style="line-height: 1.82em !important;">
+					<ol class="hours-list">
                         {% for hour in hours %}
     						<li>{{ hour.sun }}</li>
     						<li>{{ hour.mon }}</li>
@@ -134,7 +141,7 @@
 				</div>
 			</div>
         </div>
-        <div class="title text-center" style="margin: 3%;">
+        <div class="title text-center hours-msg">
             <p>{{ hour.msg }}</p>
             {% endfor %}
         </div>
@@ -144,7 +151,7 @@
 
 
 <!-- Start Map Area -->
-<section style="margin-bottom:5%; padding:5%;">
+<section class="map-section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="menu-content pb-60 col-lg-8">
@@ -155,7 +162,7 @@
             </div>
             <div class="container-fluid">
                 <div class="row align-items-center d-flex justify-content-start">
-                    <div style=" width:100%; height: 545px;" id="map"></div>
+                    <div class="map-container" id="map"></div>
                 </div>
             </div>
 

@@ -4,63 +4,68 @@
 {% block body %}
 
 <style>
+    /* Auth form styles - shared with login */
+    .auth-form-box {
+        background-color: white;
+        border-radius: 10px;
+    }
+    .auth-form {
+        padding-top: 40px;
+        padding-bottom: 0px;
+    }
+    .auth-links {
+        padding-bottom: 30px;
+    }
+    .banner-content {
+        margin: auto;
+    }
 
-    /* stop the input tags from becoming to large */
-    input{
+    /* Form element adjustments */
+    input {
         width: -moz-available;
     }
-
-    /* separate form items a bit more */
-    label{
-        margin-top:15px;
+    label {
+        margin-top: 15px;
     }
 
-    /* hide help text from the form
-    .helptext{
-      visibility: hidden;
-      display: none;
-  }*/
-
-  .banner-content{
-      margin: auto;
-  }
-  @media only screen and (max-width: 600px) {
-    .mx-auto{
-        width: 100% !important;
+    @media only screen and (max-width: 600px) {
+        .mx-auto {
+            width: 100% !important;
+        }
     }
-}
-
 </style>
 
-
 <!-- start banner Area -->
-    <div class="container" style="height: 870px;">
-        <div class="row fullscreen d-flex align-items-center justify-content-start" >
+<section class="banner-area relative" id="home">
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
             <div class="banner-content col-lg-8 col-md-12">
-                <!-- FORM AREA -->
-                <div class='mx-auto w-50 p-0' style="height:">
+
+                <!-- REGISTER FORM AREA -->
+                <div class='mx-auto w-50 p-0 auth-form-box'>
                     {% if messages %}
+                        {% for message in messages %}
                         <div class='generic-blockquote'>
-                            {{ messages }}
+                            {{ message }}
                         </div>
+                        {% endfor %}
                     {% endif %}
-                    <form class='m-5' action="{% url 'register' %}" method="POST" >
+                    <form class='auth-form m-5' action="{% url 'register' %}" method="POST">
                         {% csrf_token %}
-                        {{ form.as_table }}
+                        {{ form.as_p }}
                         <br>
                         <button type="submit" class="genric-btn primary circle">Register</button>
                     </form>
-                    <div class='text-center m-2'>
+                    <div class='text-center m-2 auth-links'>
                         Already have an account? <a href="{% url 'login'%}">Log in</a>!
                     </div>
                 </div>
-                <!-- END OF LOGIN FORM -->
+                <!-- END OF REGISTER FORM -->
+
             </div>
         </div>
     </div>
+</section>
 <!-- End banner Area -->
-
-
-
 
 {% endblock %}

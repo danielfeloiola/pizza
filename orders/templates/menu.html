@@ -6,29 +6,46 @@
 
 
 <style>
-  #message{
-    color: white;
-  }
-  a:visited {
-    color: inherit;
-  }
+  #message { color: white; }
+  a:visited { color: inherit; }
+
+  /* Menu layout */
+  .menu-flex { display: flex; }
+  .menu-flex-grow { flex-grow: 1; }
+  .menu-center { text-align: center; }
+  .menu-link { text-decoration: underline; }
+
+  /* Menu cards */
+  .menu-card { width: 350px; margin: 15px auto; display: inline-block; cursor: default; }
+  .menu-card-sm { width: 350px; margin: 5px auto; display: inline-block; cursor: default; }
+  .menu-title { text-align: left; }
+  .menu-img { transform: none; }
+
+  /* Menu tables */
+  .menu-table-wrap { overflow-x: hidden; }
+  .menu-table-wrap-inherit { width: inherit; overflow-x: hidden; }
+  .menu-table { padding-left: 20px; }
+  .menu-col-name { width: 20%; text-align: left; }
+  .menu-col-left { text-align: left; }
+
+  /* Menu buttons */
+  .menu-btn { color: #777; cursor: pointer; }
 </style>
 
 <section class="top-dish-area section-gap" id="dish">
 
 {% if messages %}
-    <div style="display: flex;">
-        <div style="flex-grow: 1;"></div>
+    <div class="menu-flex">
+        <div class="menu-flex-grow"></div>
         <div class='alert'>
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <!--{{ messages }}-->
-            Item added to <a id="message" style="text-decoration: underline;" href="/cart" >cart</a>
+            Item added to <a id="message" class="menu-link" href="/cart">cart</a>
         </div>
     </div>
 {% endif %}
 
 
-    <div class="container" style="text-align:center;">
+    <div class="container menu-center">
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-30 col-lg-8">
                 <div class="title text-center">
@@ -42,34 +59,34 @@
             <!-- START OF THE MENU -->
 
             <!-- SICILIAN PIZZA -->
-            <div class="single-dish" style="width:350px;  margin: 15px auto 15px auto; display:inline-block; cursor:default;">
+            <div class="single-dish" class="menu-card">
 
-                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Sicilian Pizzas</h4>
+                <h4 class="text-uppercase pt-20 pb-20 menu-title">Sicilian Pizzas</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" src="{% static 'img/sicilian.jpg' %}" class="img-fluid" alt=""/>
+                    <img class="menu-img" src="{% static 'img/sicilian.jpg' %}" class="img-fluid" alt=""/>
                 </div>
 
                 <!--table-->
-                <div class="progress-table-wrap" style="width: inherit; overflow-x: hidden;">
-                    <div class="progress-table" style="padding-left:20px;">
+                <div class="progress-table-wrap menu-table-wrap-inherit">
+                    <div class="progress-table menu-table">
                         <!--head-->
                         <div class="table-head">
-                            <div style="width: 20%;text-align:left" class="visit">Pizza</div>
-                            <div style="text-align:left" class="serial">Small</div>
-                            <div style="text-align:left" class="serial">Large</div>
+                            <div class="visit menu-col-name">Pizza</div>
+                            <div class="serial menu-col-left">Small</div>
+                            <div class="serial menu-col-left">Large</div>
                         </div>
                         <!--body-->
                         {% for SPizza in SicilianPizza %}
                         <div class="table-row">
-                            <div style="width: 20%; text-align:left;" class="visit"> {{ SPizza.name }}</div>
+                            <div class="visit menu-col-name"> {{ SPizza.name }}</div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ SPizza.price_small }}" size="Small" name="{{ SPizza.name }}" itemfamily="Sicilian Pizzas" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ SPizza.price_small }}" size="Small" name="{{ SPizza.name }}" itemfamily="Sicilian Pizzas" num="{{ forloop.counter0 }}">
                                     {{ SPizza.price_small }}
                                 </button>
                             </div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ SPizza.price_large }}" size="Large" name="{{ SPizza.name }}" itemfamily="Sicilian Pizzas" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ SPizza.price_large }}" size="Large" name="{{ SPizza.name }}" itemfamily="Sicilian Pizzas" num="{{ forloop.counter0 }}">
                                     {{ SPizza.price_large }}
                                 </button>
                             </div>
@@ -80,34 +97,34 @@
             </div>
 
             <!-- REGULAR PIZZA  -->
-            <div class="single-dish " style="width:350px; margin: 15px auto 15px auto; display:inline-block;cursor:default;">
+            <div class="single-dish " class="menu-card">
                 <!--title-->
-                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Regular Pizzas</h4>
+                <h4 class="text-uppercase pt-20 pb-20 menu-title">Regular Pizzas</h4>
                 <!--image-->
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid" src="{% static 'img/pizza.jpg' %}" alt=""> <!--src="img/d2.jpg"-->
+                    <img class="img-fluid menu-img" src="{% static 'img/pizza.jpg' %}" alt=""> <!--src="img/d2.jpg"-->
                 </div>
 
                 <!--table-->
-                <div class="progress-table-wrap" style="overflow-x:hidden;">
-                    <div class="progress-table" style="padding-left:20px;">
+                <div class="progress-table-wrap menu-table-wrap">
+                    <div class="progress-table menu-table">
                         <!--head-->
                         <div class="table-head">
-                            <div style="width: 20%;text-align:left;" class="visit">Pizza</div>
-                            <div style="text-align:left" class="serial">Small</div>
-                            <div style="text-align:left" class="serial">Large</div>
+                            <div class="visit menu-col-name">Pizza</div>
+                            <div class="serial menu-col-left">Small</div>
+                            <div class="serial menu-col-left">Large</div>
                         </div>
                         <!--body-->
                         {% for Pizza in RegularPizza %}
                         <div class="table-row">
-                            <div style="width: 20%; text-align:left" class="visit"> {{ Pizza.name }}</div>
+                            <div class="visit menu-col-name"> {{ Pizza.name }}</div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ Pizza.price_small }}" size="Small" name="{{ Pizza.name }}" itemfamily="Regular Pizzas" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ Pizza.price_small }}" size="Small" name="{{ Pizza.name }}" itemfamily="Regular Pizzas" num="{{ forloop.counter0 }}">
                                     {{ Pizza.price_small }}
                                 </button>
                             </div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ Pizza.price_large }}" size="Large" name="{{ Pizza.name }}" itemfamily="Regular Pizzas" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link-pizza" data-toggle="modal" data-target="#pizzaModal" price="{{ Pizza.price_large }}" size="Large" name="{{ Pizza.name }}" itemfamily="Regular Pizzas" num="{{ forloop.counter0 }}">
                                     {{ Pizza.price_large }}
                                 </button>
                             </div>
@@ -119,29 +136,29 @@
             </div>
 
             <!-- PASTA -->
-            <div class="single-dish" style="width:350px; margin: 15px auto 15px auto; display:inline-block;cursor:default;">
-                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Pasta</h4>
+            <div class="single-dish" class="menu-card">
+                <h4 class="text-uppercase pt-20 pb-20 menu-title">Pasta</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/ziti.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img class="img-fluid menu-img"  src="{% static 'img/ziti.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
-                <div class="progress-table-wrap" style="overflow-x:hidden;">
-                    <div class="progress-table" style="padding-left:20px;">
+                <div class="progress-table-wrap menu-table-wrap">
+                    <div class="progress-table menu-table">
                         <!--head-->
                         <div class="table-head">
-                            <div style="width: 20%;text-align:left;" class="visit">Pasta</div>
-                            <div style="text-align:left" class="serial"></div>
-                            <div style="text-align:left" class="serial">Price</div>
+                            <div class="visit menu-col-name">Pasta</div>
+                            <div class="serial menu-col-left"></div>
+                            <div class="serial menu-col-left">Price</div>
                         </div>
                         <!-- body -->
                         {% for pasta in pastas %}
                         <div class="table-row">
-                            <div style="width: 20%;text-align:left;" class="visit"> {{ pasta.name }}</div>
+                            <div class="visit menu-col-name"> {{ pasta.name }}</div>
 
                             <div class="serial"></div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ pasta.price }}" size="unique" name="{{ pasta.name }}" itemfamily="Pasta" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ pasta.price }}" size="unique" name="{{ pasta.name }}" itemfamily="Pasta" num="{{ forloop.counter0 }}">
                                     {{ pasta.price }}
                                 </button>
                             </div>
@@ -155,29 +172,29 @@
             <!-- END OF ROW -->
 
             <!-- SALADS -->
-            <div class="single-dish" style="width:350px; margin: 5px auto 5px auto; display:inline-block;cursor:default;">
-                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Salads</h4>
+            <div class="single-dish" class="menu-card-sm">
+                <h4 class="text-uppercase pt-20 pb-20 menu-title">Salads</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/salad.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img class="img-fluid menu-img"  src="{% static 'img/salad.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
-                <div class="progress-table-wrap" style="overflow-x:hidden;">
-                    <div class="progress-table" style="padding-left:20px;">
+                <div class="progress-table-wrap menu-table-wrap">
+                    <div class="progress-table menu-table">
                         <!--head-->
                         <div class="table-head">
-                            <div style="width: 20%;text-align:left;" class="visit">Salad</div>
-                            <div style="text-align:left" class="serial"></div>
-                            <div style="text-align:left" class="serial">Price</div>
+                            <div class="visit menu-col-name">Salad</div>
+                            <div class="serial menu-col-left"></div>
+                            <div class="serial menu-col-left">Price</div>
                         </div>
                         <!-- body -->
                         {% for salad in salads %}
                         <div class="table-row">
-                            <div style="width: 20%;text-align:left;" class="visit"> {{ salad.name }}</div>
+                            <div class="visit menu-col-name"> {{ salad.name }}</div>
 
                             <div class="serial"></div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ salad.price }}" size="unique" name="{{ salad.name }}" itemfamily="Salad" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ salad.price }}" size="unique" name="{{ salad.name }}" itemfamily="Salad" num="{{ forloop.counter0 }}">
                                     {{ salad.price }}
                                 </button>
                             </div>
@@ -189,35 +206,35 @@
             <!-- end of salads -->
 
             <!-- DINNER PLATTERS -->
-            <div class="single-dish" style="width:350px; margin: 5px auto 5px auto; display:inline-block;cursor:default;">
-                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">dinner platters</h4>
+            <div class="single-dish" class="menu-card-sm">
+                <h4 class="text-uppercase pt-20 pb-20 menu-title">dinner platters</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img class="img-fluid menu-img"  src="{% static 'img/d3.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
-                <div class="progress-table-wrap" style="overflow-x:hidden;">
-                    <div class="progress-table" style="padding-left:20px;">
+                <div class="progress-table-wrap menu-table-wrap">
+                    <div class="progress-table menu-table">
                         <!--head-->
                         <div class="table-head">
-                            <div style="width: 20%;text-align:left;" class="visit">platter</div>
-                            <div style="text-align:left" class="serial">Small</div>
-                            <div style="text-align:left" class="serial">large</div>
+                            <div class="visit menu-col-name">platter</div>
+                            <div class="serial menu-col-left">Small</div>
+                            <div class="serial menu-col-left">large</div>
                         </div>
                         <!-- body -->
                         {% for platter in platters %}
                         <div class="table-row">
-                            <div style="width: 20%;text-align:left;" class="visit"> {{ platter.name }}</div>
+                            <div class="visit menu-col-name"> {{ platter.name }}</div>
 
 
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ platter.price_small }}" size="Small" name="{{ platter.name }}" itemfamily="Dinner Platter" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ platter.price_small }}" size="Small" name="{{ platter.name }}" itemfamily="Dinner Platter" num="{{ forloop.counter0 }}">
                                     {{ platter.price_small }}
                                 </button>
                             </div>
 
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ platter.price_large }}" size="Large" name="{{ platter.name }}" itemfamily="Dinner Platter" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link" data-toggle="modal" data-target="#itemModal" price="{{ platter.price_large }}" size="Large" name="{{ platter.name }}" itemfamily="Dinner Platter" num="{{ forloop.counter0 }}">
                                     {{ platter.price_large }}
                                 </button>
                             </div>
@@ -229,32 +246,32 @@
             <!-- end of Dinner -->
 
             <!-- SUBS -->
-            <div class="single-dish" style="width:350px; margin: 5px auto 5px auto; display:inline-block;cursor:default;">
-                <h4 style="text-align:left;" class="text-uppercase pt-20 pb-20">Subs</h4>
+            <div class="single-dish" class="menu-card-sm">
+                <h4 class="text-uppercase pt-20 pb-20 menu-title">Subs</h4>
 
                 <div class="thumb">
-                    <img style="transform: none;" class="img-fluid"  src="{% static 'img/sub.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
+                    <img class="img-fluid menu-img"  src="{% static 'img/sub.jpg' %}" alt=""> <!-- src="img/d3.jpg" -->
                 </div>
                 <!--table-->
-                <div class="progress-table-wrap" style="overflow-x:hidden;">
-                    <div class="progress-table" style="padding-left:20px;">
+                <div class="progress-table-wrap menu-table-wrap">
+                    <div class="progress-table menu-table">
                         <!--head-->
                         <div class="table-head">
-                            <div style="text-align:left; width: 20%;" class="visit">Sub</div>
-                            <div style="text-align:left" class="serial">Small</div>
-                            <div style="text-align:left" class="serial">Large</div>
+                            <div class="visit menu-col-name">Sub</div>
+                            <div class="serial menu-col-left">Small</div>
+                            <div class="serial menu-col-left">Large</div>
                         </div>
                         <!--body-->
                         {% for sub in subs %}
                         <div class="table-row">
-                            <div style="width: 20%; text-align:left" class="visit"> {{ sub.name }}</div>
+                            <div class="visit menu-col-name"> {{ sub.name }}</div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link-sub" data-toggle="modal" data-target="#subModal" price="{{ sub.price_small }}" size="Small" name="{{ sub.name }}" itemfamily="Sub" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link-sub" data-toggle="modal" data-target="#subModal" price="{{ sub.price_small }}" size="Small" name="{{ sub.name }}" itemfamily="Sub" num="{{ forloop.counter0 }}">
                                     {{ sub.price_small }}
                                 </button>
                             </div>
                             <div class="serial">
-                                <button style='color: #777;cursor:pointer;' href='' id="link-sub" data-toggle="modal" data-target="#subModal" price="{{ sub.price_large }}" size="Large" name="{{ sub.name }}" itemfamily="Subs" num="{{ forloop.counter0 }}">
+                                <button class="menu-btn" href='' id="link-sub" data-toggle="modal" data-target="#subModal" price="{{ sub.price_large }}" size="Large" name="{{ sub.name }}" itemfamily="Subs" num="{{ forloop.counter0 }}">
                                     {{ sub.price_large }}
                                 </button>
                             </div>

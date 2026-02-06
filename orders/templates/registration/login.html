@@ -4,59 +4,60 @@
 {% block body %}
 
 <style>
-
-    input{
-        width: -moz-available;
-
+    /* Auth form styles - shared with register */
+    .auth-form-box {
+        background-color: white;
+        border-radius: 10px;
     }
-    .m-5{
+    .auth-form {
         padding-top: 40px;
         padding-bottom: 0px;
     }
-    .text-center{
-        padding-bottom: 30px;"
+    .auth-links {
+        padding-bottom: 30px;
     }
-    .banner-content{
+    .banner-content {
         margin: auto;
     }
+
+    /* Form element adjustments */
+    input {
+        width: -moz-available;
+    }
+
     @media only screen and (max-width: 600px) {
-      .mx-auto{
-          width: 100% !important;
-      }
-  }
-
+        .mx-auto {
+            width: 100% !important;
+        }
+    }
 </style>
-
 
 <!-- start banner Area -->
 <section class="banner-area relative" id="home">
     <div class="container">
         <div class="row fullscreen d-flex align-items-center justify-content-start">
-            <div class="banner-content col-lg-8 col-md-12"> <!-- style="width: 50%; margin: 0 auto;" -->
+            <div class="banner-content col-lg-8 col-md-12">
 
                 <!-- LOGIN FORM AREA -->
-                <div class='mx-auto w-50 p-0' style="background-color: white; border-radius: 10px;">
+                <div class='mx-auto w-50 p-0 auth-form-box'>
                     {% if messages %}
                         {% for message in messages %}
                         <div class='generic-blockquote'>
-                            {{message}}
+                            {{ message }}
                         </div>
                         {% endfor %}
                     {% endif %}
-                    <form class='m-5' action="{% url 'login' %}" method="POST" >
+                    <form class='auth-form m-5' action="{% url 'login' %}" method="POST">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="genric-btn primary circle">Log In</button>
                     </form>
-                    <div class='text-center m-2'>
+                    <div class='text-center m-2 auth-links'>
                         No account yet? <a href="{% url 'register'%}">Create one</a>!
                         <br>
                         Forgot your <a href="{% url 'password_reset'%}">password</a>?
-
-
                     </div>
                 </div>
-
                 <!-- END OF LOGIN FORM -->
 
             </div>
@@ -64,8 +65,5 @@
     </div>
 </section>
 <!-- End banner Area -->
-
-
-
 
 {% endblock %}
