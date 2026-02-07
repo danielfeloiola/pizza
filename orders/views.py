@@ -333,6 +333,7 @@ def cart(request):
             d = {
                 'username': username,
                 "CartItems": cart.item.all(),
+                "cart_total": user.cart_total,
             }
             subject, from_email, to = "Your Pinocchio's order", "Pinocchio's Pizza <" + os.getenv("DEFAULT_FROM_EMAIL") + ">", email
             html_content = html_template.render(d)
